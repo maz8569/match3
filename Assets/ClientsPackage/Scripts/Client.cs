@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Client : MonoBehaviour
 {
-    private RecipeSO _desiredDish {get; set;}
+    public RecipeSO _desiredDish {get; private set;}
     
     [SerializeField]
-    public LevelSO _currentLevel; //TODO: fetch from Match3 GameObject
-
+    private LevelSO _currentLevel; //TODO: fetch from Match3 GameObject
+   
     private void Start()
     {
         var random = new System.Random();
