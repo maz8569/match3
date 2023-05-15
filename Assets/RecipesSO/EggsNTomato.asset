@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe08245087614f4285c974d4c3702c5, type: 3}
+  m_Name: EggsNTomato
+  m_EditorClassIdentifier: 
+  RecipeName: EggsNTomato
+  Sprite: {fileID: 21300000, guid: a5c204b1a2f51c340b41adc4c564bcf2, type: 3}
+  Ingredient1: {fileID: 11400000, guid: bf9bf242b587b404eb2255a405f8e7ac, type: 2}
+  Ingredient2: {fileID: 11400000, guid: e012ceea6962f264cac05fd2029cc6cb, type: 2}
+  Ingredient3: {fileID: 0}

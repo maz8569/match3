@@ -1,0 +1,153 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+public class Match3Visual : MonoBehaviour
+{
+    public enum State
+    {
+        Busy,
+        WaitingForUser,
+    }
+
+    public event EventHandler OnStateChanged;
+
+    [SerializeField] private Transform pfItemGridVisual;
+    [SerializeField] private Transform pfBackgroundGridVisual;
+    [SerializeField] private Match3 match3;
+    [SerializeField] private TouchManager touchManager;
+
+    private BaseGrid<ItemGridPosition> grid;
+    private Dictionary<ItemGrid, ItemGridVisual> itemGridDictionary;
+
+    private bool isSetup; 
+    private State state;
+    private float busyTimer;
+    private Action onBusyTimerElapsedAction;
+
+    private void Awake()
+    {
+        state = State.Busy;
+
+        match3.OnLevelSet += Match3_OnLevelSet;
+    }
+
+    private void Match3_OnLevelSet(object sender, Match3.OnLevelSetEventArgs e)
+    {
+        Setup(sender as Match3, e.grid);
+    }
+
+    public void Setup(Match3 match3, BaseGrid<ItemGridPosition> grid)
+    {
+        this.match3 = match3;
+        this.grid = grid;
+
+        match3.OnItemPositionDestroyed += ItemPositionDestroyed;
+        match3.OnNewItemGridSpawned += ItemSpawned;
+
+        itemGridDictionary = new Dictionary<ItemGrid, ItemGridVisual>();
+
+        for (int x = 0; x < grid.Width; x++)
+        {
+            for (int y = 0; y < grid.Height; y++)
+            {
+                ItemGridPosition itemGridPosition = grid.GetGridObject(x, y);
+                ItemGrid itemGrid = itemGridPosition.GetItemGrid();
+
+                Vector3 position = grid.GetWorldPosition(x, y);
+                position = new Vector3(position.x, position.y);
+
+                // Visual Transform
+                Transform itemGridVisualTransform = Instantiate(pfItemGridVisual, position, Quaternion.identity, transform.GetChild(0));
+                itemGridVisualTransform.Find("sprite").GetComponent<SpriteRenderer>().sprite = itemGrid.Item.Sprite;
+
+                ItemGridVisual itemGridVisual = new ItemGridVisual(itemGridVisualTransform, itemGrid, grid.CellSize);
+
+                itemGridDictionary[itemGrid] = itemGridVisual;
+
+                // Background Grid Visual
+                Instantiate(pfBackgroundGridVisual, grid.GetWorldPosition(x, y), Quaternion.identity, transform.GetChild(1));
+            }
+        }
+
+        isSetup = true;
+    }
+
+    private void ItemPositionDestroyed(object sender, System.EventArgs e)
+    {
+        ItemGridPosition itemGridPosition = sender as ItemGridPosition;
+        Debug.Log("Deleted");
+
+        if (itemGridPosition != null && itemGridPosition.GetItemGrid() != null)
+        {
+            itemGridDictionary.Remove(itemGridPosition.GetItemGrid());
+        }
+    }
+
+    private void ItemSpawned(object sender, Match3.OnNewItemGridSpawnedEventArgs e)
+    {
+        Vector3 position = e.itemGridPosition.GetWorldPosition();
+        position = new Vector3(position.x, position.y + 0.5f);
+
+        Transform itemGridVisualTransform = Instantiate(pfItemGridVisual, position, Quaternion.identity, transform.GetChild(0));
+        itemGridVisualTransform.Find("sprite").GetComponent<SpriteRenderer>().sprite = e.itemGrid.Item.Sprite;
+
+        ItemGridVisual itemGridVisual = new ItemGridVisual(itemGridVisualTransform, e.itemGrid, grid.CellSize);
+
+        itemGridDictionary[e.itemGrid] = itemGridVisual;
+
+    }
+
+    private void OnEnable()
+    {
+        touchManager.OnDrag += Drag;
+        touchManager.OnDragCancelled += DragCancelled;
+    }
+
+    private void OnDisable()
+    {
+        touchManager.OnDrag -= Drag;
+        touchManager.OnDragCancelled -= DragCancelled;
+    }
+
+    private void Drag(object sender, Vector3 position)
+    {
+        match3.PrintItemType(position);
+    }
+
+    private void DragCancelled(object sender, System.EventArgs e)
+    {
+        match3.DestroyChosenItems();
+        match3.FallItemsIntoEmpty();
+        match3.SpawnNewMissingItems();
+
+        match3.ClearLists();
+    }
+
+    private void SetState(State state)
+    {
+        this.state = state;
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public State GetState()
+    {
+        return state;
+    }
+
+    private void Update()
+    {
+        UpdateVisual();
+    }
+
+    private void UpdateVisual()
+    {
+        foreach(ItemGrid itemGrid in itemGridDictionary.Keys)
+        {
+            itemGridDictionary[itemGrid].Update();
+        }
+    }
+
+}
