@@ -60,9 +60,12 @@ public class DesiredDish : MonoBehaviour
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(touchPosition));
         if (!rayHit.collider) return;
         
-        //Enable/disable ingredients list
-        _ingredientsList.SetActive(!_ingredientsList.activeSelf);
-        _spriteRenderer.enabled = !_spriteRenderer.enabled;
+        if(rayHit.collider == transform.GetComponent<BoxCollider2D>())
+        {
+            //Enable/disable ingredients list
+            _ingredientsList.SetActive(!_ingredientsList.activeSelf);
+            _spriteRenderer.enabled = !_spriteRenderer.enabled;
+        }
 
     }
     
