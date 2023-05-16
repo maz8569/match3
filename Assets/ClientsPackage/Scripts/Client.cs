@@ -6,8 +6,8 @@ public class Client : MonoBehaviour
 {
     public RecipeSO _desiredDish {get; private set;}
     
-    [SerializeField]
-    private LevelSO _currentLevel; //TODO: fetch from Match3 GameObject
+    [SerializeField] private LevelSO _currentLevel; //TODO: fetch from Match3 GameObject
+    [SerializeField] private TouchManager _touchManager; //TODO: fetch from scene
    
     private void Start()
     {
@@ -18,5 +18,7 @@ public class Client : MonoBehaviour
 
         Debug.Log(_desiredDish);
     }
+
+    //TODO: onDisable()
 
 }
