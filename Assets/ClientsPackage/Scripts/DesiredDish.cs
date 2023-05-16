@@ -23,22 +23,22 @@ public class DesiredDish : MonoBehaviour
     private void Start()
     {
         //Fetch necessary items
-        _spriteRenderer.sprite = _parent._desiredDish.Sprite;
+        _spriteRenderer.sprite = _parent.desiredDish.Sprite;
         _ingredientsList = transform.GetChild(0).gameObject;
 
         //Set ingredients sprites
         //TODO: ingredients in list(?)
-        if(_parent._desiredDish.Ingredient1 != null)
+        if(_parent.desiredDish.Ingredient1 != null)
         {
-            _ingredientsList.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = _parent._desiredDish.Ingredient1.Sprite; //TODO: check for exceptions
+            _ingredientsList.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = _parent.desiredDish.Ingredient1.Sprite; //TODO: check for exceptions
         }
-        if(_parent._desiredDish.Ingredient2 != null)
+        if(_parent.desiredDish.Ingredient2 != null)
         {
-            _ingredientsList.transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = _parent._desiredDish.Ingredient2.Sprite; //TODO: check for exceptions
+            _ingredientsList.transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = _parent.desiredDish.Ingredient2.Sprite; //TODO: check for exceptions
         }
-        if(_parent._desiredDish.Ingredient3 != null)
+        if(_parent.desiredDish.Ingredient3 != null)
         {
-            _ingredientsList.transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = _parent._desiredDish.Ingredient3.Sprite; //TODO: check for exceptions
+            _ingredientsList.transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = _parent.desiredDish.Ingredient3.Sprite; //TODO: check for exceptions
         }
     }
 
