@@ -23,16 +23,21 @@ public class DiningHall : MonoBehaviour
         }
     }
 
-    void InstantiateClient(Vector2 position)
+    private void InstantiateClient(Vector2 position)
     {
         GameObject tmp = Instantiate(_clientPrefab, new Vector3(position.x, position.y, 0), Quaternion.identity);
+        tmp.GetComponent<Client>()._seatNr = _clients.Count;
+        tmp.GetComponent<Client>().diningHall = this;
         _clients.Add(tmp.GetComponent<Client>());
     }
 
-    void DeleteClient(int idx)
+    public void DeleteClient(Client client)
     {
-        Client tmp = _clients[idx];
-        _clients.RemoveAt(idx);
-        Destroy(tmp.transform.parent);
+        _clients.Remove(client);
+        Vector2 freedPosition = new Vector2(client.transform.position.x, client.transform.position.y);
+        
+        Destroy(client.transform.gameObject);
+
+        InstantiateClient(freedPosition);
     }
 }

@@ -10,6 +10,8 @@ public class Client : MonoBehaviour
     //Client's patience in seconds
     public const float PATIENCE = 10;
     private float _waitingTime = 0;
+    public int _seatNr {get; set;}
+    public DiningHall diningHall;
     
     [SerializeField] private LevelSO _currentLevel; //TODO: fetch from Match3 GameObject
     [SerializeField] private Image _progressBar;
@@ -45,6 +47,7 @@ public class Client : MonoBehaviour
             yield return new WaitForSeconds(0.1f);//TODO: magic numbers
             _waitingTime -= 0.1f; //TODO: magic numbers
         }
+        diningHall.DeleteClient(this); //TODO: delegation/event
     }
 
 }
