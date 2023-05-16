@@ -18,6 +18,7 @@ public class DesiredDish : MonoBehaviour
     {
         //Set camera for RayCasting
         _mainCamera = Camera.main;
+        _mainCamera.transparencySortMode = TransparencySortMode.Orthographic;
     }
 
     private void Start()

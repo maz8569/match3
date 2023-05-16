@@ -32,8 +32,6 @@ public class Client : MonoBehaviour
         {
             float state = _waitingTime / PATIENCE;
 
-            Debug.Log(state);
-
             _progressBar.fillAmount = state;
 
             if(state < 0.2f){ //TODO: magic numbers
