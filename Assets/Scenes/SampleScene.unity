@@ -475,7 +475,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 427163661}
-  - component: {fileID: 427163660}
   - component: {fileID: 427163659}
   m_Layer: 0
   m_Name: DiningHall
@@ -498,32 +497,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clientPrefab: {fileID: 3353207458875984492, guid: 87f5887cdf24ba14b9bef224506cd4f4, type: 3}
   _match3: {fileID: 1324761713}
---- !u!61 &427163660
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427163658}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.2533629, y: 0.040032387}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 7.50472, y: 3.6032467}
-  m_EdgeRadius: 0
 --- !u!4 &427163661
 Transform:
   m_ObjectHideFlags: 0
