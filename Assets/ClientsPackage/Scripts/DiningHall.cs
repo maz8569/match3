@@ -7,9 +7,12 @@ public class DiningHall : MonoBehaviour
     private List<Client> _clients;
 
     [SerializeField] private GameObject _clientPrefab;
+    [SerializeField] private Match3 _match3;
 
     void Start()
     {
+        _match3.OnNewItemChanged += ItemChanged;
+
         _clients = new List<Client>();
 
         //TODO: magic numbers
@@ -39,5 +42,16 @@ public class DiningHall : MonoBehaviour
         Destroy(client.transform.gameObject);
 
         InstantiateClient(freedPosition);
+    }
+
+    public void ItemChanged(object sender, System.EventArgs e)
+    {
+        foreach(Client client in _clients){
+            if(client.desiredDish == _match3.GetLastChosen())
+            {
+                DeleteClient(client);
+                return;
+            }
+        }
     }
 }
