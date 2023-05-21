@@ -10,6 +10,8 @@ public class LevelSO : ScriptableObject
     public int width;
     public int height;
     public int targetScore;
+    public int clientsNumber;
+    public float cellSize;
+    public float cellDistance;
     public List<RecipeSO> recipes;
-
 }

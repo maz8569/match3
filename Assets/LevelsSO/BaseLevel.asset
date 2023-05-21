@@ -19,6 +19,9 @@ MonoBehaviour:
   width: 5
   height: 5
   targetScore: 100
+  clientsNumber: 3
+  cellSize: 0.9
+  cellDistance: 0.15
   recipes:
   - {fileID: 11400000, guid: 00858830d5f4735418a3fca0fd05ff63, type: 2}
   - {fileID: 11400000, guid: 0b07569e171cc924e8cf98ff234197a7, type: 2}

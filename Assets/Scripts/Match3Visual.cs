@@ -62,13 +62,17 @@ public class Match3Visual : MonoBehaviour
                 // Visual Transform
                 Transform itemGridVisualTransform = Instantiate(pfItemGridVisual, position, Quaternion.identity, transform.GetChild(0));
                 itemGridVisualTransform.Find("sprite").GetComponent<SpriteRenderer>().sprite = itemGrid.Item.Sprite;
+                float scale = match3.cellSize - match3.cellDistance * 2;
+                itemGridVisualTransform.GetChild(0).localScale = new Vector3(scale, scale, scale);
 
                 ItemGridVisual itemGridVisual = new ItemGridVisual(itemGridVisualTransform, itemGrid, grid.CellSize);
 
                 itemGridDictionary[itemGrid] = itemGridVisual;
 
                 // Background Grid Visual
-                Instantiate(pfBackgroundGridVisual, grid.GetWorldPosition(x, y), Quaternion.identity, transform.GetChild(1));
+                Transform bgVisual = Instantiate(pfBackgroundGridVisual, grid.GetWorldPosition(x, y), Quaternion.identity, transform.GetChild(1));
+                scale *= 10;
+                bgVisual.GetChild(0).localScale = new Vector3(scale, scale, scale);
             }
         }
 
@@ -77,10 +81,7 @@ public class Match3Visual : MonoBehaviour
 
     private void ItemPositionDestroyed(object sender, System.EventArgs e)
     {
-        ItemGridPosition itemGridPosition = sender as ItemGridPosition;
-        Debug.Log("Deleted");
-
-        if (itemGridPosition != null && itemGridPosition.GetItemGrid() != null)
+        if (sender is ItemGridPosition itemGridPosition && itemGridPosition.GetItemGrid() != null)
         {
             itemGridDictionary.Remove(itemGridPosition.GetItemGrid());
         }
@@ -93,6 +94,8 @@ public class Match3Visual : MonoBehaviour
 
         Transform itemGridVisualTransform = Instantiate(pfItemGridVisual, position, Quaternion.identity, transform.GetChild(0));
         itemGridVisualTransform.Find("sprite").GetComponent<SpriteRenderer>().sprite = e.itemGrid.Item.Sprite;
+        float scale = match3.cellSize - match3.cellDistance * 2;
+        itemGridVisualTransform.GetChild(0).localScale = new Vector3(scale, scale, scale);
 
         ItemGridVisual itemGridVisual = new ItemGridVisual(itemGridVisualTransform, e.itemGrid, grid.CellSize);
 
@@ -119,9 +122,16 @@ public class Match3Visual : MonoBehaviour
 
     private void DragCancelled(object sender, System.EventArgs e)
     {
-        match3.DestroyChosenItems();
-        match3.FallItemsIntoEmpty();
-        match3.SpawnNewMissingItems();
+        if(match3.GetChosenItemsPositionCount() > 2)
+        {
+            match3.DestroyChosenItems();
+            match3.FallItemsIntoEmpty();
+            match3.SpawnNewMissingItems();
+        }
+        else
+        {
+            match3.ClearRecipe();
+        }
 
         match3.ClearLists();
     }

@@ -11,7 +11,7 @@ public class DiningHall : MonoBehaviour
 
     void Start()
     {
-        _match3.OnNewItemChanged += ItemChanged;
+        _match3.OnMove += ItemChanged;
 
         _clients = new List<Client>();
 

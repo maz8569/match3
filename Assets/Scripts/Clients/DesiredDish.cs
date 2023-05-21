@@ -7,6 +7,7 @@ public class DesiredDish : MonoBehaviour
 {
     private Camera _mainCamera;
     private GameObject _ingredientsList;
+    private TouchManager _touchManager;
 
     [SerializeField]
     private Client _parent;
@@ -19,6 +20,8 @@ public class DesiredDish : MonoBehaviour
         //Set camera for RayCasting
         _mainCamera = Camera.main;
         _mainCamera.transparencySortMode = TransparencySortMode.Orthographic;
+        _touchManager = GameObject.Find("TouchManager").GetComponent<TouchManager>();
+        _touchManager.OnTap += OnTap;
     }
 
     private void Start()
@@ -43,19 +46,8 @@ public class DesiredDish : MonoBehaviour
         }
     }
 
-    public void OnTap(InputAction.CallbackContext context) //TODO: one touch handler(?)
+    public void OnTap(object sender, Vector3 touchPosition ) //TODO: one touch handler(?)
     {
-        if(!context.started) return;
-
-        Vector2 touchPosition;
-
-        //Check platform before retrieving tap/touch position
-        #if UNITY_ANDROID || UNITY_IOS
-            touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
-        #elif UNITY_STANDALONE
-            touchPosition = Mouse.current.position.ReadValue();
-        #endif
-
         //Check if tapped/touched on an object
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(touchPosition));
         if (!rayHit.collider) return;
@@ -68,5 +60,10 @@ public class DesiredDish : MonoBehaviour
         }
 
     }
-    
+
+    private void OnDestroy()
+    {
+        _touchManager.OnTap -= OnTap;
+    }
+
 }

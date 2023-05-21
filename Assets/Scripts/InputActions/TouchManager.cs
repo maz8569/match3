@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.EnhancedTouch;
 
 public class TouchManager : MonoBehaviour
 {
-    public event EventHandler OnTap;
+    public event EventHandler<Vector3> OnTap;
     public event EventHandler<Vector3> OnDrag;
     public event EventHandler OnDragCancelled;
 
@@ -16,7 +16,6 @@ public class TouchManager : MonoBehaviour
 
     private InputAction tapAction;
     private InputAction dragAction;
-    private InputAction stopTouch;
 
     private void Awake()
     {
@@ -44,7 +43,7 @@ public class TouchManager : MonoBehaviour
 
     private void TapPressed(InputAction.CallbackContext context)
     {
-        OnTap?.Invoke(this, null);
+        OnTap?.Invoke(this, Touchscreen.current.primaryTouch.position.ReadValue());
     }
 
     private void DragPerformed(InputAction.CallbackContext context)

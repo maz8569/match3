@@ -21,6 +21,7 @@ public class Match3 : MonoBehaviour
     }
 
     public float cellSize = 0.5f;
+    public float cellDistance = 0.1f;
 
     public event EventHandler OnWin;
     public event EventHandler OnItemPositionDestroyed;
@@ -40,12 +41,12 @@ public class Match3 : MonoBehaviour
     private RecipeSO currentRecipe;
 
     public List<int2> chosenItemsPos;
-    public List<ItemSO> chosenItems;
+    public Dictionary<ItemSO, int> chosenItems;
 
     private void Awake()
     {
         chosenItemsPos = new List<int2>();
-        chosenItems = new List<ItemSO>();
+        chosenItems = new Dictionary<ItemSO, int>();
     }
 
     private void Start()
@@ -65,6 +66,8 @@ public class Match3 : MonoBehaviour
 
         gridWidth = levelSO.width; 
         gridHeight = levelSO.height;
+        cellSize = levelSO.cellSize;
+        cellDistance = levelSO.cellDistance;
 
         grid = new BaseGrid<ItemGridPosition>(gridWidth, gridHeight, cellSize, Vector3.zero, (BaseGrid<ItemGridPosition> g, int x, int y) => new ItemGridPosition(g, x, y));
 
@@ -116,13 +119,40 @@ public class Match3 : MonoBehaviour
         
         if(temp == null) return;
 
-        if (!chosenItemsPos.Contains(new int2(temp.X, temp.Y)))
+        int2 itemPos = new int2(temp.X, temp.Y);
+
+        if (!chosenItemsPos.Contains(itemPos))
         {
             chosenItemsPos.Add(new int2(temp.X, temp.Y));
 
-            if (!chosenItems.Contains(temp.GetItemGrid().Item))
+            if (!chosenItems.ContainsKey(temp.GetItemGrid().Item))
             {
-                chosenItems.Add(temp.GetItemGrid().Item);
+                chosenItems.Add(temp.GetItemGrid().Item, 1);
+            }
+            else
+            {
+                chosenItems[temp.GetItemGrid().Item] += 1;
+            }
+
+            CheckRecipe();
+
+            OnNewItemChanged?.Invoke(this, EventArgs.Empty);
+            return;
+        }
+
+        if (chosenItemsPos.Count < 2) return;
+
+        if (chosenItemsPos[^2].Equals(itemPos))
+        {
+            ItemSO item = GetItemSO(chosenItemsPos[^1].x, chosenItemsPos[^1].y);
+
+            chosenItemsPos.RemoveAt(chosenItemsPos.Count - 1);
+
+            chosenItems[item] -= 1;
+
+            if(chosenItems[item] == 0)
+            {
+                chosenItems.Remove(item);
             }
 
             CheckRecipe();
@@ -130,11 +160,17 @@ public class Match3 : MonoBehaviour
             OnNewItemChanged?.Invoke(this, EventArgs.Empty);
 
         }
+
     }
 
     public RecipeSO GetLastChosen()
     {
         return currentRecipe;
+    }
+
+    public void ClearRecipe()
+    {
+        currentRecipe = null;
     }
 
     public Vector2 GetLastChosenItemPosition()
@@ -156,6 +192,8 @@ public class Match3 : MonoBehaviour
     {
         chosenItems.Clear();
         chosenItemsPos.Clear();
+
+        OnMove?.Invoke(this, EventArgs.Empty);
     }
 
     public void DestroyChosenItems()
@@ -166,8 +204,6 @@ public class Match3 : MonoBehaviour
             OnItemPositionDestroyed?.Invoke(grid.GetGridObject(item.x, item.y), EventArgs.Empty);
             grid.GetGridObject(item.x, item.y).ClearItemGrid();
         }
-
-        OnMove?.Invoke(this, EventArgs.Empty);
     }
 
     public void SpawnNewMissingItems()
@@ -197,7 +233,7 @@ public class Match3 : MonoBehaviour
         {
             var list = recipe.GetItemList();
 
-            if (list.Count == chosenItems.Count && !list.Except(chosenItems).Any())
+            if (list.Count == chosenItems.Count && !list.Except(chosenItems.Keys).Any())
             {
                 currentRecipe = recipe;
                 return;
