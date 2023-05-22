@@ -102,7 +102,7 @@ public class Match3 : MonoBehaviour
         for(int i = 0; i < gridHeight; i++){
             for(int j = 0; j < gridWidth; j++){
 
-                chosenItems.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1); //TODO: DRY(PrintItemType())
+                chosenItems.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1);
                 
                 retVal |= CheckBoardHelper(i + 1, j, 2);
                 retVal |= CheckBoardHelper(i, j + 1, 2);
@@ -124,6 +124,9 @@ public class Match3 : MonoBehaviour
     /// <summary>
     /// Helper recurrency function for CheckBoard.
     /// </summary>
+    /// <param name="x">The x-coordinate on the grid.</param>
+    /// <param name="y">The y-coordinate on the grid.</param>
+    /// <param name="depth">The current length of the chain.</param>
     private bool CheckBoardHelper(int x, int y, int depth)//TODO: merge with CheckBoard, check diagonally
     {
         bool retVal = false;
@@ -134,27 +137,13 @@ public class Match3 : MonoBehaviour
         } 
         else 
         {
-            if (!chosenItems.ContainsKey(grid.GetGridObject(x, y).GetItemGrid().Item))
-            {
-                chosenItems.Add(grid.GetGridObject(x, y).GetItemGrid().Item, 1);
-            }
-            else
-            {
-                chosenItems[grid.GetGridObject(x, y).GetItemGrid().Item] += 1;
-            }
+            AddItemToChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
 
             if(depth == 3)
             {
                 CheckRecipe();
 
-                if(chosenItems[grid.GetGridObject(x, y).GetItemGrid().Item] > 1)
-                {
-                    chosenItems[grid.GetGridObject(x, y).GetItemGrid().Item] -= 1;
-                }
-                else
-                {
-                    chosenItems.Remove(grid.GetGridObject(x, y).GetItemGrid().Item);
-                }
+                RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
 
                 if(currentRecipe != null)
                 {
@@ -171,18 +160,39 @@ public class Match3 : MonoBehaviour
                 retVal |= CheckBoardHelper(x + 1, y, depth + 1);
                 retVal |= CheckBoardHelper(x, y + 1, depth + 1);
 
-                if(chosenItems[grid.GetGridObject(x, y).GetItemGrid().Item] > 1)//TODO: DRY (remove function)
-                {
-                    chosenItems[grid.GetGridObject(x, y).GetItemGrid().Item] -= 1;
-                }
-                else
-                {
-                    chosenItems.Remove(grid.GetGridObject(x, y).GetItemGrid().Item);
-                }
+                RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
             }
         }
 
         return retVal;
+    }
+
+    private void RemoveItemFromChosenList(ItemSO item)
+    {
+        if(!chosenItems.ContainsKey(item))
+        {
+            return;
+        }
+        else if (chosenItems[item] > 1)
+        {
+            chosenItems[item] -= 1;
+        }
+        else
+        {
+            chosenItems.Remove(item);
+        }
+    }
+
+    private void AddItemToChosenList(ItemSO item)
+    {
+        if (!chosenItems.ContainsKey(item))
+        {
+            chosenItems.Add(item, 1);
+        }
+        else
+        {
+            chosenItems[item] += 1;
+        }
     }
 
     private ItemSO GetItemSO(int x, int y)
@@ -222,14 +232,7 @@ public class Match3 : MonoBehaviour
         {
             chosenItemsPos.Add(new int2(temp.X, temp.Y));
 
-            if (!chosenItems.ContainsKey(temp.GetItemGrid().Item))
-            {
-                chosenItems.Add(temp.GetItemGrid().Item, 1);
-            }
-            else
-            {
-                chosenItems[temp.GetItemGrid().Item] += 1;
-            }
+            AddItemToChosenList(temp.GetItemGrid().Item);
 
             CheckRecipe();
 
