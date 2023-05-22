@@ -86,6 +86,135 @@ public class Match3 : MonoBehaviour
 
         OnLevelSet?.Invoke(this, new OnLevelSetEventArgs { levelSO = levelSO, grid = grid });
 
+        Debug.Log(CheckBoard());
+
+    }
+
+    /// <summary>
+    /// Checks if there is at least one legal combination in the grid.
+    /// </summary>
+    private bool CheckBoard() //TODO: optimize
+    {
+        for(int i = 0; i < gridHeight - 2; i++){ //TODO: magic numbers
+            for(int j = 0; j < gridWidth - 2; j++){ //TODO: magic numbers
+
+                chosenItems.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1); //TODO: DRY(PrintItemType())
+                
+                if (!chosenItems.ContainsKey(grid.GetGridObject(i + 1, j).GetItemGrid().Item))
+                {
+                    chosenItems.Add(grid.GetGridObject(i + 1, j).GetItemGrid().Item, 1);
+                }
+                else
+                {
+                    chosenItems[grid.GetGridObject(i + 1, j).GetItemGrid().Item] += 1;
+                }
+
+                if (!chosenItems.ContainsKey(grid.GetGridObject(i + 2, j).GetItemGrid().Item))
+                {
+                    chosenItems.Add(grid.GetGridObject(i + 2, j).GetItemGrid().Item, 1);
+                }
+                else
+                {
+                    chosenItems[grid.GetGridObject(i + 2, j).GetItemGrid().Item] += 1;
+                }
+
+                CheckRecipe();
+
+                if(currentRecipe != null)
+                {
+                    return true;
+                }
+
+                chosenItems.Clear();
+                currentRecipe = null;
+
+                chosenItems.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1); //TODO: DRY(PrintItemType())
+                
+                if (!chosenItems.ContainsKey(grid.GetGridObject(i, j + 1).GetItemGrid().Item))
+                {
+                    chosenItems.Add(grid.GetGridObject(i, j + 1).GetItemGrid().Item, 1);
+                }
+                else
+                {
+                    chosenItems[grid.GetGridObject(i, j + 1).GetItemGrid().Item] += 1;
+                }
+
+                if (!chosenItems.ContainsKey(grid.GetGridObject(i, j + 2).GetItemGrid().Item))
+                {
+                    chosenItems.Add(grid.GetGridObject(i, j + 2).GetItemGrid().Item, 1);
+                }
+                else
+                {
+                    chosenItems[grid.GetGridObject(i, j + 2).GetItemGrid().Item] += 1;
+                }
+
+                chosenItems.Clear();
+                currentRecipe = null;
+                
+            }
+        }
+
+        return false;
+    }
+
+    private bool CheckBoardHelper(int x, int y, int depth)
+    {
+        bool retVal = false;
+
+        if(!IsValidPosition(x, y))
+        {
+            return false;
+        } 
+        else 
+        {
+            if (!chosenItems.ContainsKey(grid.GetGridObject(x, y).GetItemGrid().Item))
+            {
+                chosenItems.Add(grid.GetGridObject(x, y).GetItemGrid().Item, 1);
+            }
+            else
+            {
+                chosenItems[grid.GetGridObject(x, y).GetItemGrid().Item] += 1;
+            }
+
+            if(depth == 3)
+            {
+                CheckRecipe();
+
+                if(chosenItems[grid.GetGridObject(x, y).GetItemGrid().Item] > 1)
+                {
+                    chosenItems[grid.GetGridObject(x, y).GetItemGrid().Item] -= 1;
+                }
+                else
+                {
+                    chosenItems.Remove(grid.GetGridObject(x, y).GetItemGrid().Item);
+                }
+
+                if(currentRecipe != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                retVal |= CheckBoardHelper(x + 1, y, depth + 1);
+                retVal |= CheckBoardHelper(x, y + 1, depth + 1);
+
+                if(chosenItems[grid.GetGridObject(x, y).GetItemGrid().Item] > 1)//TODO: DRY (remove function)
+                {
+                    chosenItems[grid.GetGridObject(x, y).GetItemGrid().Item] -= 1;
+                }
+                else
+                {
+                    chosenItems.Remove(grid.GetGridObject(x, y).GetItemGrid().Item);
+                }
+            }
+        }
+
+        return retVal;
     }
 
     private ItemSO GetItemSO(int x, int y)
