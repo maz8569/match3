@@ -86,66 +86,30 @@ public class Match3 : MonoBehaviour
 
         OnLevelSet?.Invoke(this, new OnLevelSetEventArgs { levelSO = levelSO, grid = grid });
 
+        var temp = Time.realtimeSinceStartup;
         Debug.Log(CheckBoard());
+        Debug.Log(("Time for CheckBoard: "+(Time.realtimeSinceStartup - temp).ToString("f6")));
 
     }
 
     /// <summary>
     /// Checks if there is at least one legal combination in the grid.
     /// </summary>
-    private bool CheckBoard() //TODO: optimize
+    private bool CheckBoard() //TODO: optimize (ignore already checked combinations)
     {
-        for(int i = 0; i < gridHeight - 2; i++){ //TODO: magic numbers
-            for(int j = 0; j < gridWidth - 2; j++){ //TODO: magic numbers
+        bool retVal = false;
+
+        for(int i = 0; i < gridHeight; i++){
+            for(int j = 0; j < gridWidth; j++){
 
                 chosenItems.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1); //TODO: DRY(PrintItemType())
                 
-                if (!chosenItems.ContainsKey(grid.GetGridObject(i + 1, j).GetItemGrid().Item))
-                {
-                    chosenItems.Add(grid.GetGridObject(i + 1, j).GetItemGrid().Item, 1);
-                }
-                else
-                {
-                    chosenItems[grid.GetGridObject(i + 1, j).GetItemGrid().Item] += 1;
-                }
+                retVal |= CheckBoardHelper(i + 1, j, 2);
+                retVal |= CheckBoardHelper(i, j + 1, 2);
 
-                if (!chosenItems.ContainsKey(grid.GetGridObject(i + 2, j).GetItemGrid().Item))
-                {
-                    chosenItems.Add(grid.GetGridObject(i + 2, j).GetItemGrid().Item, 1);
-                }
-                else
-                {
-                    chosenItems[grid.GetGridObject(i + 2, j).GetItemGrid().Item] += 1;
-                }
-
-                CheckRecipe();
-
-                if(currentRecipe != null)
+                if(retVal)
                 {
                     return true;
-                }
-
-                chosenItems.Clear();
-                currentRecipe = null;
-
-                chosenItems.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1); //TODO: DRY(PrintItemType())
-                
-                if (!chosenItems.ContainsKey(grid.GetGridObject(i, j + 1).GetItemGrid().Item))
-                {
-                    chosenItems.Add(grid.GetGridObject(i, j + 1).GetItemGrid().Item, 1);
-                }
-                else
-                {
-                    chosenItems[grid.GetGridObject(i, j + 1).GetItemGrid().Item] += 1;
-                }
-
-                if (!chosenItems.ContainsKey(grid.GetGridObject(i, j + 2).GetItemGrid().Item))
-                {
-                    chosenItems.Add(grid.GetGridObject(i, j + 2).GetItemGrid().Item, 1);
-                }
-                else
-                {
-                    chosenItems[grid.GetGridObject(i, j + 2).GetItemGrid().Item] += 1;
                 }
 
                 chosenItems.Clear();
@@ -157,7 +121,10 @@ public class Match3 : MonoBehaviour
         return false;
     }
 
-    private bool CheckBoardHelper(int x, int y, int depth)
+    /// <summary>
+    /// Helper recurrency function for CheckBoard.
+    /// </summary>
+    private bool CheckBoardHelper(int x, int y, int depth)//TODO: merge with CheckBoard, check diagonally
     {
         bool retVal = false;
 
@@ -191,6 +158,7 @@ public class Match3 : MonoBehaviour
 
                 if(currentRecipe != null)
                 {
+                    currentRecipe = null;
                     return true;
                 }
                 else
