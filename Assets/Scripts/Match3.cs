@@ -40,11 +40,13 @@ public class Match3 : MonoBehaviour
 
     private RecipeSO currentRecipe;
 
-    public List<int2> chosenItemsPos;
-    public Dictionary<ItemSO, int> chosenItems;
+    private List<int2> possibleMoves;
+    private List<int2> chosenItemsPos;
+    private Dictionary<ItemSO, int> chosenItems;
 
     private void Awake()
     {
+        possibleMoves = new List<int2>();
         chosenItemsPos = new List<int2>();
         chosenItems = new Dictionary<ItemSO, int>();
     }
@@ -78,7 +80,6 @@ public class Match3 : MonoBehaviour
                 ItemSO item = levelSO.items[random.Next(levelSO.items.Count)];
                 ItemGrid itemGrid = new ItemGrid(item, x, y);
                 grid.GetGridObject(x, y).SetItemGrid(itemGrid);
-                //Debug.Log($"x = {x}, y = {y} " + item.name);
             }
         }
 
@@ -222,11 +223,14 @@ public class Match3 : MonoBehaviour
 
     public void PrintItemType(Vector3 pos)
     {
-        ItemGridPosition temp = grid.GetGridObject(pos);
+        ItemGridPosition temp = grid.GetGridObject(pos, cellSize * 0.5f - cellDistance);
         
         if(temp == null) return;
+        if (temp.GetItemGrid() == null) return;
 
         int2 itemPos = new int2(temp.X, temp.Y);
+
+        if (!IsMovePossible(itemPos)) return;
 
         if (!chosenItemsPos.Contains(itemPos))
         {
@@ -261,6 +265,37 @@ public class Match3 : MonoBehaviour
 
         }
 
+    }
+
+    public bool IsMovePossible(int2 currentPos)
+    {
+        if (chosenItemsPos.Count == 0) return true;
+
+        if (chosenItemsPos[^1].Equals(currentPos))
+        {
+            Debug.Log("SamePosition");
+            return false;
+        }
+
+        UpdatePossibleMoves();
+
+        return possibleMoves.Contains(currentPos);
+    }
+
+    public void UpdatePossibleMoves()
+    {
+        possibleMoves.Clear();
+
+        possibleMoves.Add(chosenItemsPos[^1] + new int2(1, 0));
+        possibleMoves.Add(chosenItemsPos[^1] + new int2(0, 1));
+        possibleMoves.Add(chosenItemsPos[^1] + new int2(-1, 0));
+        possibleMoves.Add(chosenItemsPos[^1] + new int2(0, -1));
+
+
+        possibleMoves.Add(chosenItemsPos[^1] + new int2(1, 1));
+        possibleMoves.Add(chosenItemsPos[^1] + new int2(1, -1));
+        possibleMoves.Add(chosenItemsPos[^1] + new int2(-1, 1));
+        possibleMoves.Add(chosenItemsPos[^1] + new int2(-1, -1));
     }
 
     public RecipeSO GetLastChosen()

@@ -49,6 +49,25 @@ public class BaseGrid<TGridObject>
         y = Mathf.FloorToInt((worldPosition - originPosition).y / cellSize);
     }
 
+    public void GetXY(Vector3 worldPosition, float cellDistance, out int x, out int y)
+    {
+        Vector3 cellWorld = worldPosition - originPosition;
+
+        x = Mathf.FloorToInt(cellWorld.x / cellSize);
+        y = Mathf.FloorToInt(cellWorld.y / cellSize);
+
+        Vector3 temp = GetWorldPosition(x, y);
+
+        float newCell = cellSize - cellDistance;
+
+        if(temp.x + newCell < cellWorld.x || temp.x - newCell > cellWorld.x ||
+            temp.y + newCell < cellWorld.y || temp.y - newCell > cellWorld.y)
+        {
+            x = -1;
+            y = -1;
+        }
+    }
+
     public void SetGridObject(int x, int y, TGridObject value)
     {
         if (x >= 0 && y >= 0 && x < width && y < height)
@@ -79,6 +98,15 @@ public class BaseGrid<TGridObject>
         {
             return default;
         }
+    }
+
+    public TGridObject GetGridObject(Vector3 worldPosition, float cellDistance)
+    {
+        GetXY(worldPosition, cellDistance, out int x, out int y);
+
+        if (x == -1) return default;
+
+        return GetGridObject(x, y);
     }
 
     public TGridObject GetGridObject(Vector3 worldPosition)
