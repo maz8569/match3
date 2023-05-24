@@ -7,8 +7,13 @@ public class LevelSelectionButton : MonoBehaviour
 {
     [SerializeField] int levelNr;
 
-    public void ChangeLevel()
+    private void ChangeLevel()
     {
         SceneManager.LoadSceneAsync(levelNr);
+    }
+
+    public void OnTouch()
+    {
+        ChangeLevel();
     }
 }
