@@ -14,4 +14,13 @@ public class LevelSO : ScriptableObject
     public float cellSize;
     public float cellDistance;
     public List<RecipeSO> recipes;
+    public List<LevelGridPosition> levelGridPositions;
+
+    [System.Serializable]
+    public class LevelGridPosition
+    {
+        public ItemSO itemSO;
+        public int x;
+        public int y;
+    }
 }

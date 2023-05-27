@@ -77,7 +77,10 @@ public class Match3 : MonoBehaviour
         {
             for(int y = 0; y < gridHeight; y++)
             {
-                ItemSO item = levelSO.items[random.Next(levelSO.items.Count)];
+                ItemSO item = levelSO.levelGridPositions.Find(gridPos => gridPos.x == x && gridPos.y == y)?.itemSO;
+
+                if(item.name == "Empty" || item == null) item = levelSO.items[UnityEngine.Random.Range(0, levelSO.items.Count)];
+
                 ItemGrid itemGrid = new ItemGrid(item, x, y);
                 grid.GetGridObject(x, y).SetItemGrid(itemGrid);
             }
@@ -387,7 +390,7 @@ public class Match3 : MonoBehaviour
             {
                 ItemGridPosition itemGridPosition = grid.GetGridObject(x, y);
 
-                if (!itemGridPosition.IsEmpty())
+                if (!itemGridPosition.IsEmpty() && itemGridPosition.GetItemGrid()?.Item.name != "Blocked")
                 {
                     for(int i = y - 1; i >= 0; i--)
                     {
@@ -399,11 +402,6 @@ public class Match3 : MonoBehaviour
                             itemGridPosition.ClearItemGrid();
 
                             itemGridPosition = nextItemGridPosition;
-                        }
-                        else
-                        {
-                            // Next Grid Position is not empty, stop looking
-                            break;
                         }
                     }
                 }

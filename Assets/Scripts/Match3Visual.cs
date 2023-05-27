@@ -68,11 +68,14 @@ public class Match3Visual : MonoBehaviour
                 ItemGridVisual itemGridVisual = new ItemGridVisual(itemGridVisualTransform, itemGrid, grid.CellSize);
 
                 itemGridDictionary[itemGrid] = itemGridVisual;
+                if (itemGrid.Item.ItemName != "Blocked")
+                {
+                    // Background Grid Visual
+                    Transform bgVisual = Instantiate(pfBackgroundGridVisual, grid.GetWorldPosition(x, y), Quaternion.identity, transform.GetChild(1));
+                    scale *= 10;
+                    bgVisual.GetChild(0).localScale = new Vector3(scale, scale, scale);
+                }
 
-                // Background Grid Visual
-                Transform bgVisual = Instantiate(pfBackgroundGridVisual, grid.GetWorldPosition(x, y), Quaternion.identity, transform.GetChild(1));
-                scale *= 10;
-                bgVisual.GetChild(0).localScale = new Vector3(scale, scale, scale);
             }
         }
 
