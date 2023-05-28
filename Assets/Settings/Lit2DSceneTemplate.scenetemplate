@@ -65,7 +65,11 @@ MonoBehaviour:
     the 2D Renderer in Universal RP.
   preview: {fileID: -3604256930052969394}
   dependencies:
+  - dependency: {fileID: 2800000, guid: a7d1e782fc67a0e4188e4f01f9fe949c, type: 3}
+    instantiationMode: 0
   - dependency: {fileID: 11400000, guid: 1ba51cd0cbc01294889c3ea9ef53e383, type: 2}
+    instantiationMode: 1
+  - dependency: {fileID: 11400000, guid: 0a5c0c3c895845a41910f850e7d1a0fc, type: 2}
     instantiationMode: 1
   - dependency: {fileID: 2800000, guid: a5c204b1a2f51c340b41adc4c564bcf2, type: 3}
     instantiationMode: 0
@@ -75,9 +79,9 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
     instantiationMode: 0
-  - dependency: {fileID: 11400000, guid: 00858830d5f4735418a3fca0fd05ff63, type: 2}
-    instantiationMode: 1
   - dependency: {fileID: 2800000, guid: 2fd6421f253b4ef1a19526541f9ffc0c, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 11400000, guid: 00858830d5f4735418a3fca0fd05ff63, type: 2}
     instantiationMode: 1
   - dependency: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
     instantiationMode: 1
@@ -99,14 +103,18 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: b22181ab2d6062640bba87560c4be91d, type: 3}
     instantiationMode: 0
-  - dependency: {fileID: 11400000, guid: f645c34c0f242b04897f1eff188ad008, type: 2}
+  - dependency: {fileID: 2800000, guid: ee148e281f3c41c5b4ff5f8a5afe5a6c, type: 3}
     instantiationMode: 1
   - dependency: {fileID: 2847343242491728845, guid: e6864f1e6a3eba34dafb08e3bed7ba2b, type: 3}
     instantiationMode: 0
-  - dependency: {fileID: 2800000, guid: ee148e281f3c41c5b4ff5f8a5afe5a6c, type: 3}
+  - dependency: {fileID: 11400000, guid: f645c34c0f242b04897f1eff188ad008, type: 2}
+    instantiationMode: 1
+  - dependency: {fileID: 11400000, guid: 644bc93ed2c17dc4aaba390791527e51, type: 2}
     instantiationMode: 1
   - dependency: {fileID: 11400000, guid: 0b07569e171cc924e8cf98ff234197a7, type: 2}
     instantiationMode: 1
+  - dependency: {fileID: 2800000, guid: 6011f6bf601c51644a8e8d0b7379e9c8, type: 3}
+    instantiationMode: 0
   - dependency: {fileID: 2726273758137313709, guid: b52bc2b65b3a3f746b2bacc59f69a00c, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
