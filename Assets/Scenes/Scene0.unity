@@ -206,6 +206,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 263703947}
     m_Modifications:
+    - target: {fileID: 1124360155039791056, guid: e6864f1e6a3eba34dafb08e3bed7ba2b, type: 3}
+      propertyPath: _levelNr
+      value: 
+      objectReference: {fileID: 1122893287}
     - target: {fileID: 2847343242491728845, guid: e6864f1e6a3eba34dafb08e3bed7ba2b, type: 3}
       propertyPath: m_Name
       value: PauseMenu
@@ -297,6 +301,10 @@ PrefabInstance:
     - target: {fileID: 2857358781994817011, guid: e6864f1e6a3eba34dafb08e3bed7ba2b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051911620016778516, guid: e6864f1e6a3eba34dafb08e3bed7ba2b, type: 3}
+      propertyPath: m_Name
+      value: Level
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6864f1e6a3eba34dafb08e3bed7ba2b, type: 3}
@@ -833,6 +841,17 @@ Transform:
   m_Father: {fileID: 2031020949}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1122893287 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6407344584945806398, guid: e6864f1e6a3eba34dafb08e3bed7ba2b, type: 3}
+  m_PrefabInstance: {fileID: 126770003}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1159523125 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2314344887203412549, guid: 965987ffe2b869e45ac7644c8b447e43, type: 3}
@@ -870,7 +889,6 @@ MonoBehaviour:
   cellSize: 0.5
   cellDistance: 0.1
   levelSO: {fileID: 11400000, guid: f645c34c0f242b04897f1eff188ad008, type: 2}
-  chosenItemsPos: []
 --- !u!4 &1324761714
 Transform:
   m_ObjectHideFlags: 0

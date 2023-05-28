@@ -14,6 +14,7 @@ public class PauseButton : MonoBehaviour
     public void OnTouch()
     {
         _pauseMenu.SetActive(true);
+        //gameObject.SetActive(false);
         PauseTime();
     }
 }
