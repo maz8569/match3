@@ -13,7 +13,7 @@ public class WeekMenu : MonoBehaviour
 
         foreach(Transform day in _dayButtons.transform)
         {
-            day.GetComponent<LevelSelectionButton>().SetStars(ProgressManager.Instance.results[ProgressManager.Instance.currentWeek, day.GetSiblingIndex()]);
+            day.GetComponent<LevelSelectionButton>().SetStars(ProgressManager.Instance.results[ProgressManager.Instance.currentWeek - 1, day.GetSiblingIndex()]);
         }
     }
 }
