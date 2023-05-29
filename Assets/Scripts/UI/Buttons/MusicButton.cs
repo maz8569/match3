@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicButton : MonoBehaviour
+public class MusicButton : StateButton
 {
-    // Start is called before the first frame update
-    void Start()
+    private void TurnMusicOn()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnTap()
     {
-        
+        TurnMusicOn();
+        ChangeImg();
     }
 }
