@@ -7,12 +7,13 @@ public class Client : MonoBehaviour
 {
     public RecipeSO desiredDish {get; private set;}
     
-    //Client's patience in seconds
+    //TODO: order variables
     public const float PATIENCE = 60;
     private float _waitingTime = 0;
     public int _seatNr {get; set;}
     public DiningHall diningHall;
-    
+    public float state = 0.0f;
+
     [SerializeField] private LevelSO _currentLevel; //TODO: fetch from Match3 GameObject
     [SerializeField] private Image _progressBar;
    
@@ -32,7 +33,7 @@ public class Client : MonoBehaviour
         _waitingTime = countdownValue;
         while (_waitingTime >= 0)
         {
-            float state = _waitingTime / PATIENCE;
+            state = _waitingTime / PATIENCE;
 
             _progressBar.fillAmount = state;
 

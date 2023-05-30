@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DiningHall : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class DiningHall : MonoBehaviour
 
     [SerializeField] private GameObject _clientPrefab;
     [SerializeField] private Match3 _match3;
+    [SerializeField] private float _roundTime; //TODO: somewhere else (?)/clock script
+    [SerializeField] private RectTransform _clockArrow; //TODO: clock script
+    [SerializeField] private int _baseClientPoints = 2;
+
+    private float points = 0;
 
     void Start()
     {
@@ -24,6 +30,22 @@ public class DiningHall : MonoBehaviour
         {
             InstantiateClient(new Vector2(transform.GetChild(i).transform.position.x, transform.GetChild(i).transform.position.y));
         }
+
+        StartCoroutine(StartCountdown());
+    }
+    
+    private IEnumerator StartCountdown()
+    {
+        float _waitingTime = _roundTime;
+        while (_waitingTime >= 0)
+        {            
+            yield return new WaitForSeconds(0.1f);//TODO: magic numbers
+            _waitingTime -= 0.1f; //TODO: magic numbers
+            float state = _waitingTime / _roundTime;
+            _clockArrow.rotation = Quaternion.Euler(0.0f, 0.0f, state * 360.0f);
+        }
+
+        Debug.Log(points);
     }
 
     private void InstantiateClient(Vector2 position)
@@ -44,11 +66,12 @@ public class DiningHall : MonoBehaviour
         InstantiateClient(freedPosition);
     }
 
-    public void ItemChanged(object sender, System.EventArgs e)
+    public void ItemChanged(object sender, System.EventArgs e) //TODO: change name
     {
         foreach(Client client in _clients){
             if(client.desiredDish == _match3.GetLastChosen())
             {
+                points += client.state * _baseClientPoints;
                 DeleteClient(client);
                 return;
             }
