@@ -127,6 +127,7 @@ public class Match3Visual : MonoBehaviour
     {
         if(match3.GetChosenItemsPositionCount() > 2)
         {
+            match3.CalculateScore();
             match3.DestroyChosenItems();
             match3.FallItemsIntoEmpty();
             match3.SpawnNewMissingItems();

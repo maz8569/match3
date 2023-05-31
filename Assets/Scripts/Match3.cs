@@ -20,6 +20,13 @@ public class Match3 : MonoBehaviour
         public BaseGrid<ItemGridPosition> grid;
     }
 
+    public class OnScoreChangedEventArgs : EventArgs
+    {
+        public int currentScore;
+        public float progress;
+        public int checkedStars;
+    }
+
     public float cellSize = 0.5f;
     public float cellDistance = 0.1f;
 
@@ -28,7 +35,7 @@ public class Match3 : MonoBehaviour
     public event EventHandler<OnNewItemGridSpawnedEventArgs> OnNewItemGridSpawned;
     public event EventHandler<OnLevelSetEventArgs> OnLevelSet;
     public event EventHandler OnMove;
-    public event EventHandler OnScoreChanged;
+    public event EventHandler<OnScoreChangedEventArgs> OnScoreChanged;
     public event EventHandler OnNewItemChanged;
 
     [SerializeField] private LevelSO levelSO;
@@ -37,6 +44,7 @@ public class Match3 : MonoBehaviour
     private int gridHeight;
     private BaseGrid<ItemGridPosition> grid;
     private int score;
+    private int checkedStars;
 
     private RecipeSO currentRecipe;
 
@@ -407,6 +415,24 @@ public class Match3 : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void CalculateScore()
+    {
+        score += 30;
+
+        float fillAmount = (float)score / levelSO.targetScore;
+        checkedStars = 0;
+
+        foreach (var score in levelSO.starsScore)
+        {
+            if(fillAmount >= score)
+            {
+                checkedStars++;
+            }
+        }
+
+        OnScoreChanged?.Invoke(this, new OnScoreChangedEventArgs { currentScore = score, progress = fillAmount, checkedStars = checkedStars });
     }
 
 }

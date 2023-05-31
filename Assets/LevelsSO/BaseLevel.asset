@@ -173,3 +173,7 @@ MonoBehaviour:
   - itemSO: {fileID: 11400000, guid: 644bc93ed2c17dc4aaba390791527e51, type: 2}
     x: 6
     y: 6
+  starsScore:
+  - 0.2
+  - 0.6
+  - 1
