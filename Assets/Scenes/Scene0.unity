@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clientPrefab: {fileID: 3353207458875984492, guid: 87f5887cdf24ba14b9bef224506cd4f4, type: 3}
   _match3: {fileID: 1324761713}
-  _roundTime: 20
+  _roundTime: 60
   _clockArrow: {fileID: 513622685}
   _baseClientPoints: 2
   _endScreen: {fileID: 1937142928}

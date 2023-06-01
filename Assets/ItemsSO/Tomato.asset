@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Tomato
   m_EditorClassIdentifier: 
   ItemName: Tomato
-  Sprite: {fileID: 21300000, guid: b22181ab2d6062640bba87560c4be91d, type: 3}
+  Sprite: {fileID: 21300000, guid: 07ab3274706bb6540876ed55093d31df, type: 3}

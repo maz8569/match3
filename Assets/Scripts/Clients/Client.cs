@@ -8,7 +8,7 @@ public class Client : MonoBehaviour
     public RecipeSO desiredDish {get; private set;}
     
     //TODO: order variables
-    public const float PATIENCE = 60;
+    public const float PATIENCE = 20;
     private float _waitingTime = 0;
     public int _seatNr {get; set;}
     public DiningHall diningHall;

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Egg
   m_EditorClassIdentifier: 
   ItemName: Egg
-  Sprite: {fileID: 21300000, guid: 119815e3bd99e7d4aa216acbe9c82cf3, type: 3}
+  Sprite: {fileID: 21300000, guid: d3b5854d2c428bb47b99697c50c4debf, type: 3}

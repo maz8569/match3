@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Carrot
   m_EditorClassIdentifier: 
   ItemName: Carrot
-  Sprite: {fileID: 21300000, guid: e7fdf695ec3d63e408a521962f370327, type: 3}
+  Sprite: {fileID: 21300000, guid: 0024252d0194f1448b40c4286d044c10, type: 3}
