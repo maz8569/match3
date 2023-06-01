@@ -10,6 +10,7 @@ public class ProgressManager : MonoBehaviour
     public int[,] results = new int[WEEKS, WEEKDAYS];
 
     public int currentWeek = 1;
+    public int currentDay = 1;
 
     public static ProgressManager Instance { get; private set; }
     private void Awake() 

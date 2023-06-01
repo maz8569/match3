@@ -13,7 +13,8 @@ public class LevelSelectionButton : MonoBehaviour
 
     private void ChangeLevel()
     {
-        SceneManager.LoadSceneAsync(levelNr * ProgressManager.Instance.currentWeek);
+        ProgressManager.Instance.currentDay = levelNr;
+        SceneManager.LoadSceneAsync(levelNr * ProgressManager.Instance.currentWeek); //TODO: move to ProgressManager
     }
 
     public void SetStars(int stars)

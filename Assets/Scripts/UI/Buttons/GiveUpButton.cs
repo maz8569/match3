@@ -13,5 +13,6 @@ public class GiveUpButton : MonoBehaviour
     public void OnClick()
     {
         GiveUp();
+        Time.timeScale = 1;
     }
 }

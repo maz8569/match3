@@ -38,13 +38,13 @@ public class Match3 : MonoBehaviour
     public event EventHandler<OnScoreChangedEventArgs> OnScoreChanged;
     public event EventHandler OnNewItemChanged;
 
-    [SerializeField] private LevelSO levelSO;
+    [SerializeField] public LevelSO levelSO;
 
     private int gridWidth;
     private int gridHeight;
     private BaseGrid<ItemGridPosition> grid;
-    private int score;
-    private int checkedStars;
+    public int score; //TODO: change back to private
+    public int checkedStars; //TODO: change back to private
 
     private RecipeSO currentRecipe;
 
@@ -419,7 +419,7 @@ public class Match3 : MonoBehaviour
 
     public void CalculateScore()
     {
-        score += 30;
+        score += chosenItemsPos.Count - 2;
 
         float fillAmount = (float)score / levelSO.targetScore;
         checkedStars = 0;

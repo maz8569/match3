@@ -12,6 +12,9 @@ public class DiningHall : MonoBehaviour
     [SerializeField] private float _roundTime; //TODO: somewhere else (?)/clock script
     [SerializeField] private RectTransform _clockArrow; //TODO: clock script
     [SerializeField] private int _baseClientPoints = 2;
+    [SerializeField] private GameObject _endScreen;
+    [SerializeField] private GameObject _losingScreen;
+    [SerializeField] private GameObject _winningScreen;
 
     private float points = 0;
 
@@ -45,12 +48,25 @@ public class DiningHall : MonoBehaviour
             _clockArrow.rotation = Quaternion.Euler(0.0f, 0.0f, state * 360.0f);
         }
 
+        _match3.score += (int)points;
+
+        _endScreen.SetActiveRecursively(true);
+
+        if(_match3.checkedStars == 0)
+        {
+            _winningScreen.SetActive(false);
+        }
+        else
+        {
+            _losingScreen.SetActive(false);
+        }
         Debug.Log(points);
     }
 
     private void InstantiateClient(Vector2 position)
     {
         GameObject tmp = Instantiate(_clientPrefab, new Vector3(position.x, position.y, 0), Quaternion.identity);
+        tmp.GetComponent<Client>()._match3 = _match3; //TODO: setters/auto-fetch
         tmp.GetComponent<Client>()._seatNr = _clients.Count;
         tmp.GetComponent<Client>().diningHall = this;
         _clients.Add(tmp.GetComponent<Client>());

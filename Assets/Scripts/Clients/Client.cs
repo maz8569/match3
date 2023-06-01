@@ -14,11 +14,14 @@ public class Client : MonoBehaviour
     public DiningHall diningHall;
     public float state = 0.0f;
 
-    [SerializeField] private LevelSO _currentLevel; //TODO: fetch from Match3 GameObject
+    public Match3 _match3; //TODO: auto-fetch
+    private LevelSO _currentLevel;
     [SerializeField] private Image _progressBar;
    
     private void Start()
     {
+        _currentLevel = _match3.levelSO; //TODO: fetch from DiningHall
+
         var random = new System.Random();
         Random.InitState(System.DateTime.Now.Millisecond); //TODO: check if necessary for each client instance
 
