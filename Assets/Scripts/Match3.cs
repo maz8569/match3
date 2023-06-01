@@ -101,6 +101,7 @@ public class Match3 : MonoBehaviour
         var temp = Time.realtimeSinceStartup;
         Debug.Log(CheckBoard());
         Debug.Log(("Time for CheckBoard: "+(Time.realtimeSinceStartup - temp).ToString("f6")));
+        ClearLists();
 
     }
 
@@ -243,7 +244,7 @@ public class Match3 : MonoBehaviour
 
         if (!IsMovePossible(itemPos)) return;
 
-        if (!chosenItemsPos.Contains(itemPos))
+        if (!chosenItemsPos.Contains(itemPos) && temp.GetItemGrid()?.Item.name != "Blocked")
         {
             chosenItemsPos.Add(new int2(temp.X, temp.Y));
 
@@ -392,29 +393,80 @@ public class Match3 : MonoBehaviour
 
     public void FallItemsIntoEmpty()
     {
-        for(int x = 0; x < gridWidth; x++)
+        RunBoardCheck((ItemGridPosition itemGridPosition, int x, int y) =>
         {
-            for(int y = 0; y < gridHeight; y++)
+            for (int i = y - 1; i >= 0; i--)
+            {
+                if (!CheckIsEmptyItem(ref itemGridPosition, x, i))
+                {
+                    break;
+                }
+            }
+
+            return true;
+        });
+
+        RunBoardCheck((ItemGridPosition itemGridPosition, int x, int y) =>
+        {
+            for (int i = y - 1; i >= 0; i--)
+            {
+                ItemGridPosition nextItemGridPosition = grid.GetGridObject(x, y);
+
+                if (!nextItemGridPosition.IsEmpty())
+                {
+                    CheckIsEmptyItem(ref itemGridPosition, x - 1, i);
+                    CheckIsEmptyItem(ref itemGridPosition, x + 1, i);
+                }
+            }
+
+            return true;
+        });
+
+        RunBoardCheck((ItemGridPosition itemGridPosition, int x, int y) =>
+        {
+            for (int i = y - 1; i >= 0; i--)
+            {
+                if (!CheckIsEmptyItem(ref itemGridPosition, x, i))
+                {
+                    break;
+                }
+            }
+
+            return true;
+        });
+    }
+
+    private void RunBoardCheck(Func<ItemGridPosition, int, int, bool> method)
+    {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
             {
                 ItemGridPosition itemGridPosition = grid.GetGridObject(x, y);
 
                 if (!itemGridPosition.IsEmpty() && itemGridPosition.GetItemGrid()?.Item.name != "Blocked")
                 {
-                    for(int i = y - 1; i >= 0; i--)
-                    {
-                        ItemGridPosition nextItemGridPosition = grid.GetGridObject(x, i);
-                        if (nextItemGridPosition.IsEmpty())
-                        {
-                            itemGridPosition.GetItemGrid().SetItemXY(x, i);
-                            nextItemGridPosition.SetItemGrid(itemGridPosition.GetItemGrid());
-                            itemGridPosition.ClearItemGrid();
-
-                            itemGridPosition = nextItemGridPosition;
-                        }
-                    }
+                    method(itemGridPosition, x, y);
                 }
             }
         }
+    }
+
+    private bool CheckIsEmptyItem(ref ItemGridPosition itemGridPosition, int x, int y)
+    {
+        ItemGridPosition nextItemGridPosition = grid.GetGridObject(x, y);
+
+        if (nextItemGridPosition.IsEmpty())
+        {
+            itemGridPosition.GetItemGrid().SetItemXY(x, y);
+            nextItemGridPosition.SetItemGrid(itemGridPosition.GetItemGrid());
+            itemGridPosition.ClearItemGrid();
+
+            itemGridPosition = nextItemGridPosition;
+            return true;
+        }
+
+        return false;
     }
 
     public void CalculateScore()
