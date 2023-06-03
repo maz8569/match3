@@ -1120,8 +1120,8 @@ MonoBehaviour:
   _dishImg: {fileID: 5986907018409010384}
   _dishIngredients:
   - {fileID: 5986907019747262906}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 5746338215115849822}
+  - {fileID: 722877644518759502}
   _dishDescription: {fileID: 5986907018234297097}
   currentPage: 0
 --- !u!1 &5986907018161277667

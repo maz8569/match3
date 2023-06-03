@@ -25,19 +25,19 @@ public class CookBook : MonoBehaviour
 
         if(wantedRecipe.Ingredient1 != null)
         {
-            _dishIngredients[0].transform.GetComponentInChildren<Image>().GetComponentInChildren<Image>().sprite = wantedRecipe.Ingredient1.Sprite;
+            _dishIngredients[0].transform.GetChild(1).GetChild(0).GetComponentInChildren<Image>().sprite = wantedRecipe.Ingredient1.Sprite; //TODO: list of img
             _dishIngredients[0].transform.GetComponentInChildren<TextMeshProUGUI>().text = wantedRecipe.Ingredient1.ItemName;
             _dishIngredients[0].SetActive(true);
         }
         if(wantedRecipe.Ingredient2 != null)
         {
-            _dishIngredients[1].transform.GetComponentInChildren<Image>().GetComponentInChildren<Image>().sprite = wantedRecipe.Ingredient2.Sprite;
+            _dishIngredients[1].transform.GetChild(1).GetChild(0).GetComponentInChildren<Image>().sprite = wantedRecipe.Ingredient2.Sprite;
             _dishIngredients[1].transform.GetComponentInChildren<TextMeshProUGUI>().text = wantedRecipe.Ingredient2.ItemName;
             _dishIngredients[1].SetActive(true);
         }
         if(wantedRecipe.Ingredient3 != null)
         {
-            _dishIngredients[2].transform.GetComponentInChildren<Image>().GetComponentInChildren<Image>().sprite = wantedRecipe.Ingredient3.Sprite;
+            _dishIngredients[2].transform.GetChild(1).GetChild(0).GetComponentInChildren<Image>().sprite = wantedRecipe.Ingredient3.Sprite;
             _dishIngredients[2].transform.GetComponentInChildren<TextMeshProUGUI>().text = wantedRecipe.Ingredient3.ItemName;
             _dishIngredients[2].SetActive(true);
         }
