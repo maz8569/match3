@@ -4,21 +4,40 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelSelectionButton : MonoBehaviour
+public class LevelSelectionButton : MonoBehaviour, IDataPesristence
 {
+    [SerializeField] private int dayNr;
     [SerializeField] private int levelNr;
     [SerializeField] private GameObject _stars;
 
     public List<Sprite> starsImg;
 
+    private void Start()
+    {
+        ProgressManager.Instance.OnWeekChanged += OnWeekChanged;
+    }
+
+    private void OnWeekChanged(object sender, System.EventArgs e)
+    {
+        levelNr = ProgressManager.WEEKDAYS * (ProgressManager.Instance.CurrentWeek - 1) + dayNr;
+    }
+
+    private void OnDisable()
+    {
+        ProgressManager.Instance.OnWeekChanged -= OnWeekChanged;
+    }
+
     private void ChangeLevel()
     {
         ProgressManager.Instance.currentDay = levelNr;
-        SceneManager.LoadSceneAsync(levelNr * ProgressManager.Instance.currentWeek); //TODO: move to ProgressManager
+        ProgressManager.Instance.ChooseLevelScriptableObj();
+        SceneManager.LoadSceneAsync(1); //TODO: move to ProgressManager
     }
 
     public void SetStars(int stars)
     {
+        Debug.Log($"day nr {levelNr}");
+
         if (stars > 0)
         {
             for (int i = 0; i < stars; i++)
@@ -43,5 +62,21 @@ public class LevelSelectionButton : MonoBehaviour
     public void OnTouch()
     {
         ChangeLevel();
+    }
+
+    public void LoadData(LevelData levelData)
+    {
+        if (levelData.checkedStars.ContainsKey(levelNr))
+        {
+            SetStars(levelData.checkedStars[levelNr]);
+        }
+        else
+        {
+            SetStars(0);
+        }
+    }
+
+    public void SaveData(ref LevelData levelData)
+    {
     }
 }

@@ -553,6 +553,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Friday
       objectReference: {fileID: 0}
+    - target: {fileID: 2296732167487428579, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
+      propertyPath: dayNr
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2296732167487428588, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -960,6 +964,10 @@ PrefabInstance:
       value: Tuesday
       objectReference: {fileID: 0}
     - target: {fileID: 2296732167487428579, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
+      propertyPath: dayNr
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296732167487428579, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
       propertyPath: levelNr
       value: 2
       objectReference: {fileID: 0}
@@ -1215,6 +1223,10 @@ PrefabInstance:
     - target: {fileID: 2296732167088384237, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
       propertyPath: m_text
       value: Wednesday
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296732167487428579, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
+      propertyPath: dayNr
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2296732167487428579, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
       propertyPath: levelNr
@@ -1705,6 +1717,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 826200974}
   m_CullTransparentMesh: 1
+--- !u!1001 &1034724098
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938736, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 327825321503938742, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
+      propertyPath: m_Name
+      value: DataPersistenceManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d008e378a8f785743aca9b16e3456b40, type: 3}
 --- !u!1 &1139991031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,6 +1825,10 @@ PrefabInstance:
     - target: {fileID: 2296732167088384237, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
       propertyPath: m_text
       value: Monday
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296732167487428579, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
+      propertyPath: dayNr
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2296732167487428588, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
       propertyPath: m_Pivot.x
@@ -2278,6 +2351,10 @@ PrefabInstance:
     - target: {fileID: 2296732167088384237, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
       propertyPath: m_text
       value: Thursday
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296732167487428579, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
+      propertyPath: dayNr
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2296732167487428579, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
       propertyPath: levelNr
@@ -2853,6 +2930,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeek: 1
   currentDay: 1
+  currentLevelScriptableObj: {fileID: 11400000, guid: f645c34c0f242b04897f1eff188ad008, type: 2}
+  levelScriptableObjs:
+  - {fileID: 11400000, guid: f645c34c0f242b04897f1eff188ad008, type: 2}
+  - {fileID: 11400000, guid: 3b43e382e0d2b1f499b7d99b69da218d, type: 2}
 --- !u!4 &1662936800
 Transform:
   m_ObjectHideFlags: 0

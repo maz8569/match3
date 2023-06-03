@@ -9,11 +9,11 @@ public class WeekMenu : MonoBehaviour
     [SerializeField] private GameObject _dayButtons;
     public void ChangeWeek()
     {
-        _weekNr.text = "Week " + ProgressManager.Instance.currentWeek;
+        _weekNr.text = "Week " + ProgressManager.Instance.CurrentWeek;
 
-        foreach(Transform day in _dayButtons.transform)
-        {
-            day.GetComponent<LevelSelectionButton>().SetStars(ProgressManager.Instance.results[ProgressManager.Instance.currentWeek - 1, day.GetSiblingIndex()]);
-        }
+        //foreach(Transform day in _dayButtons.transform)
+        //{
+        //    day.GetComponent<LevelSelectionButton>().SetStars(ProgressManager.Instance.results[ProgressManager.Instance.CurrentWeek - 1, day.GetSiblingIndex()]);
+        //}
     }
 }

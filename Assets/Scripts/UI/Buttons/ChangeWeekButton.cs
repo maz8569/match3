@@ -16,14 +16,14 @@ public class ChangeWeekButton : MonoBehaviour
     {
         if(!_previous)
         {
-            if(ProgressManager.Instance.currentWeek == ProgressManager.WEEKS - 1)
+            if(ProgressManager.Instance.CurrentWeek == ProgressManager.WEEKS - 1)
             {
-                ProgressManager.Instance.currentWeek += 1;
+                ProgressManager.Instance.CurrentWeek += 1;
                 GetComponent<Image>().sprite = _arrowSprites[0];
             }
-            else if(ProgressManager.Instance.currentWeek < ProgressManager.WEEKS)
+            else if(ProgressManager.Instance.CurrentWeek < ProgressManager.WEEKS)
             {
-                ProgressManager.Instance.currentWeek += 1;
+                ProgressManager.Instance.CurrentWeek += 1;
                 GetComponent<Image>().sprite = _arrowSprites[1];
             }
             else
@@ -33,14 +33,14 @@ public class ChangeWeekButton : MonoBehaviour
         }
         else
         {
-            if(ProgressManager.Instance.currentWeek == 2)
+            if(ProgressManager.Instance.CurrentWeek == 2)
             {
-                ProgressManager.Instance.currentWeek -= 1;
+                ProgressManager.Instance.CurrentWeek -= 1;
                 GetComponent<Image>().sprite = _arrowSprites[0];
             }
-            else if(ProgressManager.Instance.currentWeek > 1)
+            else if(ProgressManager.Instance.CurrentWeek > 1)
             {
-                ProgressManager.Instance.currentWeek -= 1;
+                ProgressManager.Instance.CurrentWeek -= 1;
                 GetComponent<Image>().sprite = _arrowSprites[1];
             }
             else

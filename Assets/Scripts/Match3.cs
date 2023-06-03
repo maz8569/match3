@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 
 // Is responsible for Match3 logic
-public class Match3 : MonoBehaviour
+public class Match3 : MonoBehaviour, IDataPesristence
 {
 
     public class OnNewItemGridSpawnedEventArgs : EventArgs
@@ -44,7 +44,7 @@ public class Match3 : MonoBehaviour
     private int gridHeight;
     private BaseGrid<ItemGridPosition> grid;
     public int score; //TODO: change back to private
-    public int checkedStars; //TODO: change back to private
+    public int checkedStars = 0; //TODO: change back to private
 
     private RecipeSO currentRecipe;
 
@@ -52,11 +52,28 @@ public class Match3 : MonoBehaviour
     private List<int2> chosenItemsPos;
     private Dictionary<ItemSO, int> chosenItems;
 
+    private int levelNumber;
+
     private void Awake()
     {
         possibleMoves = new List<int2>();
         chosenItemsPos = new List<int2>();
         chosenItems = new Dictionary<ItemSO, int>();
+    }
+
+    private void OnEnable()
+    {
+        var progressManager = FindObjectOfType<ProgressManager>();
+        if(progressManager != null)
+        {
+            levelNumber = progressManager.currentDay;
+            levelSO = progressManager.currentLevelScriptableObj;
+        }
+        else
+        {
+            levelNumber = 1;
+        }
+
     }
 
     private void Start()
@@ -235,6 +252,9 @@ public class Match3 : MonoBehaviour
 
     public void PrintItemType(Vector3 pos)
     {
+
+        Debug.Log($"position {pos}");
+
         ItemGridPosition temp = grid.GetGridObject(pos, cellSize * 0.5f - cellDistance);
         
         if(temp == null) return;
@@ -487,4 +507,25 @@ public class Match3 : MonoBehaviour
         OnScoreChanged?.Invoke(this, new OnScoreChangedEventArgs { currentScore = score, progress = fillAmount, checkedStars = checkedStars });
     }
 
+    public void LoadData(LevelData levelData)
+    {
+
+    }
+
+    public void SaveData(ref LevelData levelData)
+    {
+        Debug.Log("saved");
+
+        if (levelData.checkedStars.ContainsKey(levelNumber))
+        {
+            if (levelData.checkedStars[levelNumber] < checkedStars)
+            {
+                levelData.checkedStars[levelNumber] = checkedStars;
+            }
+        }
+        else
+        {
+            levelData.checkedStars.Add(levelNumber, checkedStars);
+        }
+    }
 }
