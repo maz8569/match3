@@ -17,7 +17,10 @@ public class Client : MonoBehaviour
     public Match3 _match3; //TODO: auto-fetch
     private LevelSO _currentLevel;
     [SerializeField] private Image _progressBar;
-   
+
+    public GameObject plate;
+    public GameObject cloud;
+
     private void Start()
     {
         _currentLevel = _match3.levelSO; //TODO: fetch from DiningHall
@@ -27,8 +30,26 @@ public class Client : MonoBehaviour
 
         desiredDish = _currentLevel.recipes[random.Next(_currentLevel.recipes.Count)];
 
+        InitializePlate();
+
         StartCoroutine(StartCountdown());
 
+    }
+
+    private void InitializePlate()
+    {
+        if(desiredDish.Ingredient1 != null)
+        {
+            plate.transform.GetChild(0).GetComponent<Image>().sprite = desiredDish.Ingredient1.Sprite; //TODO: check for exceptions
+        }
+        if(desiredDish.Ingredient2 != null)
+        {
+            plate.transform.GetChild(1).GetComponent<Image>().sprite = desiredDish.Ingredient2.Sprite; //TODO: check for exceptions
+        }
+        if(desiredDish.Ingredient3 != null)
+        {
+            plate.transform.GetChild(2).GetComponent<Image>().sprite = desiredDish.Ingredient3.Sprite; //TODO: check for exceptions
+        }
     }
 
     public IEnumerator StartCountdown(float countdownValue = PATIENCE)
@@ -51,7 +72,7 @@ public class Client : MonoBehaviour
             yield return new WaitForSeconds(0.1f);//TODO: magic numbers
             _waitingTime -= 0.1f; //TODO: magic numbers
         }
-        diningHall.DeleteClient(this); //TODO: delegation/event
+        StartCoroutine(diningHall.DeleteClient(this)); //TODO: delegation/event
     }
 
 }

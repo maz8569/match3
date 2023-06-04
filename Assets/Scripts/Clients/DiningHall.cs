@@ -7,6 +7,7 @@ public class DiningHall : MonoBehaviour
 {
     private List<Client> _clients;
 
+    [SerializeField] private float _waitTimeBetweenClients;
     [SerializeField] private GameObject _clientPrefab;
     [SerializeField] private Match3 _match3;
     [SerializeField] private float _roundTime; //TODO: somewhere else (?)/clock script
@@ -15,6 +16,9 @@ public class DiningHall : MonoBehaviour
     [SerializeField] private GameObject _endScreen;
     [SerializeField] private GameObject _losingScreen;
     [SerializeField] private GameObject _winningScreen;
+    [SerializeField] private List<GameObject> _seats; //TODO: Client struct (?)
+    [SerializeField] private List<GameObject> _plates; //TODO: Client struct (?)
+    [SerializeField] private List<GameObject> _clouds; //TODO: Client struct (?)
 
     private float points = 0;
 
@@ -25,14 +29,11 @@ public class DiningHall : MonoBehaviour
         _clients = new List<Client>();
 
         //TODO: magic numbers
-        transform.GetChild(0).transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.2f, Screen.height * 0.8f, 0.0f));
-        transform.GetChild(1).transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.5f, Screen.height * 0.8f, 0.0f));
-        transform.GetChild(2).transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.8f, Screen.height * 0.8f, 0.0f));
+        _seats[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.2f, Screen.height * 0.7f, 0.0f));
+        _seats[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.5f, Screen.height * 0.7f, 0.0f));
+        _seats[2].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.8f, Screen.height * 0.7f, 0.0f));
 
-        for(int i = 0; i < 3; i++)
-        {
-            InstantiateClient(new Vector2(transform.GetChild(i).transform.position.x, transform.GetChild(i).transform.position.y));
-        }
+        StartCoroutine(InitializeClients());
 
         StartCoroutine(StartCountdown());
     }
@@ -63,23 +64,54 @@ public class DiningHall : MonoBehaviour
         Debug.Log(points);
     }
 
-    private void InstantiateClient(Vector2 position)
+    private IEnumerator InitializeClients()
     {
-        GameObject tmp = Instantiate(_clientPrefab, new Vector3(position.x, position.y, 0), Quaternion.identity);
-        tmp.GetComponent<Client>()._match3 = _match3; //TODO: setters/auto-fetch
-        tmp.GetComponent<Client>()._seatNr = _clients.Count;
-        tmp.GetComponent<Client>().diningHall = this;
+        StartCoroutine(InstantiateClient(0));
+
+        yield return new WaitForSeconds(_waitTimeBetweenClients);
+
+        StartCoroutine(InstantiateClient(1));
+
+        yield return new WaitForSeconds(_waitTimeBetweenClients);
+
+        StartCoroutine(InstantiateClient(2));
+    }
+
+    private IEnumerator InstantiateClient(int seat)
+    {
+        yield return new WaitForSeconds(_waitTimeBetweenClients);
+        GameObject tmp = Instantiate(_clientPrefab, new Vector3(_seats[seat].transform.position.x, _seats[seat].transform.position.y, 0), Quaternion.identity);
+
+        Client tmpClient = tmp.GetComponent<Client>();
+        tmpClient._match3 = _match3; //TODO: setters/auto-fetch
+        tmpClient._seatNr = seat;
+        tmpClient.diningHall = this;
+
+        tmpClient.plate = _plates[seat];
+        tmpClient.cloud = _clouds[seat];
+
+        _plates[seat].SetActive(true);
+
         _clients.Add(tmp.GetComponent<Client>());
     }
 
-    public void DeleteClient(Client client)
+    public IEnumerator DeleteClient(Client client)
     {
+        int freedSeat = client._seatNr;
+
+        _clouds[freedSeat].transform.GetChild(0).GetComponent<Image>().sprite = client.desiredDish.Sprite;
+        _clouds[freedSeat].SetActive(true);
+
+        yield return new WaitForSeconds(_waitTimeBetweenClients);
+
         _clients.Remove(client);
-        Vector2 freedPosition = new Vector2(client.transform.position.x, client.transform.position.y);
         
+        _plates[freedSeat].SetActive(false);
+        _clouds[freedSeat].SetActive(false);
+
         Destroy(client.transform.gameObject);
 
-        InstantiateClient(freedPosition);
+        StartCoroutine(InstantiateClient(freedSeat));
     }
 
     public void ItemChanged(object sender, System.EventArgs e) //TODO: change name
@@ -88,7 +120,7 @@ public class DiningHall : MonoBehaviour
             if(client.desiredDish == _match3.GetLastChosen())
             {
                 points += client.state * _baseClientPoints;
-                DeleteClient(client);
+                StartCoroutine(DeleteClient(client));
                 return;
             }
         }
