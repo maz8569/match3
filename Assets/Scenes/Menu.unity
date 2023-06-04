@@ -2341,6 +2341,7 @@ MonoBehaviour:
   _arrowSprites:
   - {fileID: 21300000, guid: 148df7bcb610dab4dad32c400f614121, type: 3}
   - {fileID: 21300000, guid: a12de8c1738972d40bbce4608e5ce9d0, type: 3}
+  _otherArrow: {fileID: 1439604083}
 --- !u!1001 &1356912808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2618,6 +2619,7 @@ MonoBehaviour:
   _arrowSprites:
   - {fileID: 21300000, guid: 148df7bcb610dab4dad32c400f614121, type: 3}
   - {fileID: 21300000, guid: a12de8c1738972d40bbce4608e5ce9d0, type: 3}
+  _otherArrow: {fileID: 1318366423}
 --- !u!1001 &1562259792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2735,7 +2737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5986907018136616370, guid: b39f406e52c12bb45b992ca1e137601d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5986907019747262906, guid: b39f406e52c12bb45b992ca1e137601d, type: 3}
       propertyPath: m_IsActive
