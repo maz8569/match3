@@ -14,12 +14,14 @@ public class Match3UI : MonoBehaviour
     {
         match3.OnNewItemChanged += ItemChanged;
         match3.OnMove += Clear;
+        match3.OnFingerMove += PlayerFingerMove;
     }
 
     private void OnDisable()
     {
         match3.OnNewItemChanged -= ItemChanged;
         match3.OnMove -= Clear;
+        match3.OnFingerMove -= PlayerFingerMove;
     }
 
     private void ItemChanged(object sender, System.EventArgs e)
@@ -42,6 +44,12 @@ public class Match3UI : MonoBehaviour
 
         lineRenderer.positionCount = match3.GetChosenItemsPositionCount();
         lineRenderer.SetPosition(match3.GetChosenItemsPositionCount() - 1, match3.GetLastChosenItemPosition());
+    }
+
+    private void PlayerFingerMove(object sender, Vector3 pos)
+    {
+        lineRenderer.positionCount = match3.GetChosenItemsPositionCount() + 1;
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, pos);
     }
 
     private void Clear(object sender, System.EventArgs e)

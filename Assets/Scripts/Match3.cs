@@ -31,6 +31,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
     public float cellDistance = 0.1f;
 
     public event EventHandler OnWin;
+    public event EventHandler<Vector3> OnFingerMove;
     public event EventHandler OnItemPositionDestroyed;
     public event EventHandler<OnNewItemGridSpawnedEventArgs> OnNewItemGridSpawned;
     public event EventHandler<OnLevelSetEventArgs> OnLevelSet;
@@ -253,9 +254,9 @@ public class Match3 : MonoBehaviour, IDataPesristence
     public void PrintItemType(Vector3 pos)
     {
 
-        Debug.Log($"position {pos}");
+        OnFingerMove?.Invoke(this, pos);
 
-        ItemGridPosition temp = grid.GetGridObject(pos, cellSize * 0.5f - cellDistance);
+        ItemGridPosition temp = grid.GetGridObject(pos, cellSize * 0.25f - cellDistance);
         
         if(temp == null) return;
         if (temp.GetItemGrid() == null) return;
