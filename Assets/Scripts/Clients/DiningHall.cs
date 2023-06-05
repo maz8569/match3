@@ -20,6 +20,9 @@ public class DiningHall : MonoBehaviour
     [SerializeField] private List<GameObject> _seats; //TODO: Client struct (?)
     [SerializeField] private List<GameObject> _plates; //TODO: Client struct (?)
     [SerializeField] private List<GameObject> _clouds; //TODO: Client struct (?)
+    [SerializeField] private List<Image> _stars;
+    [SerializeField] private Sprite _filledStar;
+    [SerializeField] private Sprite _unfilledStar;
 
     private float points = 0;
 
@@ -62,6 +65,12 @@ public class DiningHall : MonoBehaviour
         else
         {
             _losingScreen.SetActive(false);
+
+            for (int i = 0; i < _match3.checkedStars; i++)
+            {
+                _stars[i].sprite = _filledStar;
+            }
+
         }
         Debug.Log(points);
     }
@@ -111,7 +120,7 @@ public class DiningHall : MonoBehaviour
         _plates[freedSeat].SetActive(false);
         _clouds[freedSeat].SetActive(false);
 
-        Destroy(client.transform.gameObject);
+        Destroy(client.transform.gameObject); //TODO; fix error
 
         StartCoroutine(InstantiateClient(freedSeat));
     }
