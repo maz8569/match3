@@ -15,19 +15,24 @@ public class DiningHall : MonoBehaviour
     [SerializeField] private Image _passedTime; //TODO: clock script
     [SerializeField] private int _baseClientPoints = 2;
     [SerializeField] private GameObject _endScreen;
-    [SerializeField] private GameObject _losingScreen;
-    [SerializeField] private GameObject _winningScreen;
+    [SerializeField] private SummaryScreen _summaryScreen;
+    [SerializeField] private GameObject _losingScreen; //TODO: move to SummaryScreen script
+    [SerializeField] private GameObject _winningScreen; //TODO: move to SummaryScreen script
     [SerializeField] private List<GameObject> _seats; //TODO: Client struct (?)
     [SerializeField] private List<GameObject> _plates; //TODO: Client struct (?)
     [SerializeField] private List<GameObject> _clouds; //TODO: Client struct (?)
-    [SerializeField] private List<Image> _stars;
-    [SerializeField] private Sprite _filledStar;
-    [SerializeField] private Sprite _unfilledStar;
+    [SerializeField] private List<Image> _stars; //TODO: move to SummaryScreen script
+    [SerializeField] private Sprite _filledStar; //TODO: move to SummaryScreen script
+    [SerializeField] private Sprite _unfilledStar; //TODO: move to SummaryScreen script
 
     private float points = 0;
+    public Dictionary<RecipeSO, Dictionary<ItemSO, int>> _recipesSummary; //TODO: make private with getter
+    public Dictionary<RecipeSO, int> _dishesSummary;
 
     void Start()
     {
+        _recipesSummary = new Dictionary<RecipeSO, Dictionary<ItemSO, int>>();
+        _dishesSummary = new Dictionary<RecipeSO, int>();
         _match3.OnMove += ItemChanged;
 
         _clients = new List<Client>();
@@ -72,6 +77,8 @@ public class DiningHall : MonoBehaviour
             }
 
         }
+
+        _summaryScreen.Activate();
         Debug.Log(points);
     }
 
@@ -130,6 +137,26 @@ public class DiningHall : MonoBehaviour
         foreach(Client client in _clients){
             if(client.desiredDish == _match3.GetLastChosen())
             {
+                if(!_recipesSummary.ContainsKey(client.desiredDish))
+                {
+                    _recipesSummary.Add(client.desiredDish, new Dictionary<ItemSO, int>());
+                    _recipesSummary[client.desiredDish].Add(client.desiredDish.Ingredient1, _match3.GetSelectedItems()[client.desiredDish.Ingredient1]);
+                    _recipesSummary[client.desiredDish].Add(client.desiredDish.Ingredient2, _match3.GetSelectedItems()[client.desiredDish.Ingredient2]);
+                    _dishesSummary.Add(client.desiredDish, 1);
+                }
+                else
+                {
+                    Debug.Log(_recipesSummary[client.desiredDish][client.desiredDish.Ingredient1].ToString());
+                    _recipesSummary[client.desiredDish][client.desiredDish.Ingredient1] += _match3.GetSelectedItems()[client.desiredDish.Ingredient1]; //TODO: fix this absolute garbage
+                    Debug.Log(client.desiredDish.Ingredient1 +" "+ _recipesSummary[client.desiredDish][client.desiredDish.Ingredient1].ToString());
+
+                    Debug.Log(_recipesSummary[client.desiredDish][client.desiredDish.Ingredient2].ToString());
+                    _recipesSummary[client.desiredDish][client.desiredDish.Ingredient2] += _match3.GetSelectedItems()[client.desiredDish.Ingredient2];
+                    Debug.Log(client.desiredDish.Ingredient2 +" "+ _recipesSummary[client.desiredDish][client.desiredDish.Ingredient2].ToString());
+
+                    _dishesSummary[client.desiredDish] += 1;
+                }
+                
                 points += client.state * _baseClientPoints;
                 StartCoroutine(DeleteClient(client));
                 return;
