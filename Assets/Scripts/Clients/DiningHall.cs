@@ -12,6 +12,7 @@ public class DiningHall : MonoBehaviour
     [SerializeField] private Match3 _match3;
     [SerializeField] private float _roundTime; //TODO: somewhere else (?)/clock script
     [SerializeField] private RectTransform _clockArrow; //TODO: clock script
+    [SerializeField] private Image _passedTime; //TODO: clock script
     [SerializeField] private int _baseClientPoints = 2;
     [SerializeField] private GameObject _endScreen;
     [SerializeField] private GameObject _losingScreen;
@@ -47,6 +48,7 @@ public class DiningHall : MonoBehaviour
             _waitingTime -= 0.1f; //TODO: magic numbers
             float state = _waitingTime / _roundTime;
             _clockArrow.rotation = Quaternion.Euler(0.0f, 0.0f, state * 360.0f);
+            _passedTime.fillAmount = 1 - state;
         }
 
         _match3.score += (int)points;
