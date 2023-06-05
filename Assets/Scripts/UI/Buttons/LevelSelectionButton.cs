@@ -69,10 +69,16 @@ public class LevelSelectionButton : MonoBehaviour, IDataPesristence
         if (levelData.checkedStars.ContainsKey(levelNr))
         {
             SetStars(levelData.checkedStars[levelNr]);
+            GetComponent<Button>().interactable = true;
+        }
+        else if(levelData.checkedStars.ContainsKey(levelNr - 1))
+        {
+            GetComponent<Button>().interactable = true;
         }
         else
         {
             SetStars(0);
+            GetComponent<Button>().interactable = false;
         }
     }
 

@@ -45,7 +45,5 @@ public class ProgressManager : MonoBehaviour
         } 
 
         DontDestroyOnLoad(this.gameObject);
-
-        results[2, 0] = 2;
     }
 }

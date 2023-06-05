@@ -8,6 +8,6 @@ public class SettingsButton : MonoBehaviour
 
     public void OnTap()
     {
-        _settingsMenu.SetActive(true);
+        _settingsMenu.SetActiveRecursively(true);
     }
 }

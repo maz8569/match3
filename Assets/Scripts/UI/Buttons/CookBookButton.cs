@@ -8,6 +8,6 @@ public class CookBookButton : MonoBehaviour
 
     public void OnTap()
     {
-        _cookBook.SetActive(true);
+        _cookBook.SetActiveRecursively(true);
     }
 }
