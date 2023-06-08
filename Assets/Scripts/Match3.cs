@@ -308,7 +308,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
 
         if (chosenItemsPos[^1].Equals(currentPos))
         {
-            Debug.Log("SamePosition");
+            //Debug.Log("SamePosition");
             return false;
         }
 
@@ -360,10 +360,11 @@ public class Match3 : MonoBehaviour, IDataPesristence
 
     public void ClearLists()
     {
+        OnMove?.Invoke(this, EventArgs.Empty); //CHECK
+
         chosenItems.Clear();
         chosenItemsPos.Clear();
 
-        OnMove?.Invoke(this, EventArgs.Empty);
     }
 
     public void DestroyChosenItems()
@@ -530,5 +531,10 @@ public class Match3 : MonoBehaviour, IDataPesristence
         {
             levelData.checkedStars.Add(levelNumber, checkedStars);
         }
+    }
+
+    public Dictionary<ItemSO, int> GetSelectedItems()
+    {
+        return chosenItems;
     }
 }

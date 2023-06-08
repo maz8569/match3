@@ -7,9 +7,10 @@ using TMPro;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _levelNr;
+    [SerializeField] private Match3 _match3;
 
     private void Start()
     {
-        _levelNr.text = "Level " + SceneManager.GetActiveScene().buildIndex.ToString();
+        _levelNr.text = _match3.levelSO.name;
     }
 }
