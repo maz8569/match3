@@ -55,6 +55,8 @@ public class Match3 : MonoBehaviour, IDataPesristence
 
     private int levelNumber;
 
+    public float offset = 0.33f;
+
     private void Awake()
     {
         possibleMoves = new List<int2>();
@@ -256,7 +258,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
 
         OnFingerMove?.Invoke(this, pos);
 
-        ItemGridPosition temp = grid.GetGridObject(pos, cellSize * 0.25f - cellDistance);
+        ItemGridPosition temp = grid.GetGridObject(pos, cellSize * offset - cellDistance);
         
         if(temp == null) return;
         if (temp.GetItemGrid() == null) return;

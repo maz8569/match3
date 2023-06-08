@@ -72,8 +72,13 @@ public class Match3Visual : MonoBehaviour
                 {
                     // Background Grid Visual
                     Transform bgVisual = Instantiate(pfBackgroundGridVisual, grid.GetWorldPosition(x, y), Quaternion.identity, transform.GetChild(1));
-                    scale *= 10;
+                    scale *= 1.5f;
                     bgVisual.GetChild(0).localScale = new Vector3(scale, scale, scale);
+                }
+                else
+                {
+                    scale *= 1.5f;
+                    itemGridVisualTransform.GetChild(0).localScale = new Vector3(scale, scale, scale);
                 }
 
             }
