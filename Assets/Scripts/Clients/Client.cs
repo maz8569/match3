@@ -16,10 +16,11 @@ public class Client : MonoBehaviour
 
     public Match3 _match3; //TODO: auto-fetch
     private LevelSO _currentLevel;
-    [SerializeField] private Image _progressBar;
 
     public GameObject plate;
     public GameObject cloud;
+
+    private bool _served = false;
 
     private void Start()
     {
@@ -59,20 +60,30 @@ public class Client : MonoBehaviour
         {
             state = _waitingTime / PATIENCE;
 
-            _progressBar.fillAmount = state;
-
-            if(state < 0.2f){ //TODO: magic numbers
-                _progressBar.color = Color.red;
+            if(_served){
+                GetComponent<SpriteRenderer>().color = Color.blue;
+            } else if(state < 0.2f){ //TODO: magic numbers
+                GetComponent<SpriteRenderer>().color = Color.red;
             } else if(state < 0.5f){ //TODO: magic numbers
-                _progressBar.color = Color.yellow;
+                GetComponent<SpriteRenderer>().color = Color.yellow;
             } else{
-                _progressBar.color = Color.green;
+                GetComponent<SpriteRenderer>().color = Color.green;
             }
             
             yield return new WaitForSeconds(0.1f);//TODO: magic numbers
             _waitingTime -= 0.1f; //TODO: magic numbers
         }
         StartCoroutine(diningHall.DeleteClient(this)); //TODO: delegation/event
+    }
+
+    public void SetServed(bool value)
+    {
+        _served = value;
+    }
+
+    public bool IsServed()
+    {
+        return _served;
     }
 
 }

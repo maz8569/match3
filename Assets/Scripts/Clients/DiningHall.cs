@@ -84,6 +84,8 @@ public class DiningHall : MonoBehaviour
 
     private IEnumerator InitializeClients()
     {
+        yield return new WaitForSeconds(0.1f); //TODO: magic number (fix to appear after closing initial message?)
+
         StartCoroutine(InstantiateClient(0));
 
         yield return new WaitForSeconds(_waitTimeBetweenClients);
@@ -97,7 +99,6 @@ public class DiningHall : MonoBehaviour
 
     private IEnumerator InstantiateClient(int seat)
     {
-        yield return new WaitForSeconds(_waitTimeBetweenClients);
         GameObject tmp = Instantiate(_clientPrefab, new Vector3(_seats[seat].transform.position.x, _seats[seat].transform.position.y, 0), Quaternion.identity);
 
         Client tmpClient = tmp.GetComponent<Client>();
@@ -111,6 +112,7 @@ public class DiningHall : MonoBehaviour
         _plates[seat].SetActive(true);
 
         _clients.Add(tmp.GetComponent<Client>());
+        yield return null;
     }
 
     public IEnumerator DeleteClient(Client client)
@@ -129,14 +131,20 @@ public class DiningHall : MonoBehaviour
 
         Destroy(client.transform.gameObject); //TODO; fix error
 
+        yield return new WaitForSeconds(_waitTimeBetweenClients);
         StartCoroutine(InstantiateClient(freedSeat));
     }
 
     public void ItemChanged(object sender, System.EventArgs e) //TODO: change name
     {
         foreach(Client client in _clients){
-            if(client.desiredDish == _match3.GetLastChosen())
+            if(client.desiredDish == _match3.GetLastChosen() && !client.IsServed())
             {
+                Debug.Log(_match3.GetLastChosen());
+                //Make client euphoric
+                client.SetServed(true);
+
+                //Save used ingredients for summary screen
                 if(!_recipesSummary.ContainsKey(client.desiredDish))
                 {
                     _recipesSummary.Add(client.desiredDish, new Dictionary<ItemSO, int>());
@@ -146,17 +154,14 @@ public class DiningHall : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log(_recipesSummary[client.desiredDish][client.desiredDish.Ingredient1].ToString());
                     _recipesSummary[client.desiredDish][client.desiredDish.Ingredient1] += _match3.GetSelectedItems()[client.desiredDish.Ingredient1]; //TODO: fix this absolute garbage
-                    Debug.Log(client.desiredDish.Ingredient1 +" "+ _recipesSummary[client.desiredDish][client.desiredDish.Ingredient1].ToString());
-
-                    Debug.Log(_recipesSummary[client.desiredDish][client.desiredDish.Ingredient2].ToString());
+                    
                     _recipesSummary[client.desiredDish][client.desiredDish.Ingredient2] += _match3.GetSelectedItems()[client.desiredDish.Ingredient2];
-                    Debug.Log(client.desiredDish.Ingredient2 +" "+ _recipesSummary[client.desiredDish][client.desiredDish.Ingredient2].ToString());
 
                     _dishesSummary[client.desiredDish] += 1;
                 }
                 
+                //Add points and delete client
                 points += client.state * _baseClientPoints;
                 StartCoroutine(DeleteClient(client));
                 return;
