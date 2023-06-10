@@ -21,6 +21,7 @@ public class DiningHall : MonoBehaviour
     [SerializeField] private List<GameObject> _seats; //TODO: Client struct (?)
     [SerializeField] private List<GameObject> _plates; //TODO: Client struct (?)
     [SerializeField] private List<GameObject> _clouds; //TODO: Client struct (?)
+    [SerializeField] private List<GameObject> _dishes; //TODO: Client struct (?)
     [SerializeField] private List<Image> _stars; //TODO: move to SummaryScreen script
     [SerializeField] private Sprite _filledStar; //TODO: move to SummaryScreen script
     [SerializeField] private Sprite _unfilledStar; //TODO: move to SummaryScreen script
@@ -108,6 +109,7 @@ public class DiningHall : MonoBehaviour
 
         tmpClient.plate = _plates[seat];
         tmpClient.cloud = _clouds[seat];
+        tmpClient.dish = _dishes[seat];
 
         _plates[seat].SetActive(true);
 
@@ -119,15 +121,23 @@ public class DiningHall : MonoBehaviour
     {
         int freedSeat = client._seatNr;
 
-        _clouds[freedSeat].transform.GetChild(0).GetComponent<Image>().sprite = client.desiredDish.Sprite;
-        _clouds[freedSeat].SetActive(true);
-
+        if (client.IsServed())
+        {
+        //_clouds[freedSeat].transform.GetChild(0).GetComponent<Image>().sprite = client.desiredDish.Sprite;
+        //_clouds[freedSeat].SetActive(true);
+        
+        _plates[freedSeat].SetActive(false);
+        _dishes[freedSeat].GetComponent<Image>().sprite = client.desiredDish.ServedSprite;
+        _dishes[freedSeat].SetActive(true);
+        }
+        
         yield return new WaitForSeconds(_waitTimeBetweenClients);
 
         _clients.Remove(client);
         
         _plates[freedSeat].SetActive(false);
         _clouds[freedSeat].SetActive(false);
+        _dishes[freedSeat].SetActive(false);
 
         Destroy(client.transform.gameObject); //TODO; fix error
 

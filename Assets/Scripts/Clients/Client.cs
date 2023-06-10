@@ -19,6 +19,7 @@ public class Client : MonoBehaviour
 
     public GameObject plate;
     public GameObject cloud;
+    public GameObject dish;
 
     private bool _served = false;
 
@@ -62,6 +63,8 @@ public class Client : MonoBehaviour
 
             if(_served){
                 GetComponent<SpriteRenderer>().color = Color.blue;
+            } else if(state < 0.01f){ //TODO: magic numbers
+                GetComponent<SpriteRenderer>().color = Color.black;
             } else if(state < 0.2f){ //TODO: magic numbers
                 GetComponent<SpriteRenderer>().color = Color.red;
             } else if(state < 0.5f){ //TODO: magic numbers

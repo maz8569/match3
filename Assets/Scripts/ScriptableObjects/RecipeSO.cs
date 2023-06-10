@@ -8,6 +8,7 @@ public class RecipeSO : ScriptableObject
 {
     public string RecipeName;
     public Sprite Sprite;
+    public Sprite ServedSprite;
     public ItemSO Ingredient1;
     public ItemSO Ingredient2;
     public ItemSO Ingredient3;
