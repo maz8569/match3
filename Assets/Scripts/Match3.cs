@@ -267,7 +267,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
 
         if (!IsMovePossible(itemPos)) return;
 
-        if (!chosenItemsPos.Contains(itemPos) && temp.GetItemGrid()?.Item.name != "Blocked")
+        if (!chosenItemsPos.Contains(itemPos) && temp.GetItemGrid()?.Item.name != "Blocked" && Time.timeScale != 0)
         {
             chosenItemsPos.Add(new int2(temp.X, temp.Y));
 
