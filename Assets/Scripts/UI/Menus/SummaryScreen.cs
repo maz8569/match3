@@ -21,7 +21,7 @@ public class SummaryScreen : MonoBehaviour
             tmpDish.SetActiveRecursively(true);
 
             tmpDish.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _diningHall._dishesSummary[_levelSO.recipes[i]].ToString();
-            tmpDish.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = _levelSO.recipes[i].Sprite;
+            tmpDish.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = _levelSO.recipes[i].ServedSprite;
             
             if (_levelSO.recipes[i].Ingredient1 != null)
             {
