@@ -11,7 +11,7 @@ public class ContinueButton : MonoBehaviour
 
     private void CloseMenu()
     {
-        transform.parent.parent.gameObject.SetActive(false); //TODO: serializefield (?)
+        transform.parent.parent.parent.gameObject.SetActive(false); //TODO: serializefield (?)
     }
 
     public void OnTouch()

@@ -9,6 +9,8 @@ public class LevelSelectionButton : MonoBehaviour, IDataPesristence
     [SerializeField] private int dayNr;
     [SerializeField] private int levelNr;
     [SerializeField] private GameObject _stars;
+    [SerializeField] private Sprite _active;
+    [SerializeField] private Sprite _inactive;
 
     public List<Sprite> starsImg;
 
@@ -69,15 +71,18 @@ public class LevelSelectionButton : MonoBehaviour, IDataPesristence
         if (levelData.checkedStars.ContainsKey(levelNr))
         {
             SetStars(levelData.checkedStars[levelNr]);
+            GetComponent<Image>().sprite = _active;
             GetComponent<Button>().interactable = true;
         }
         else if(levelData.checkedStars.ContainsKey(levelNr - 1) || levelNr == 1)
         {
+            GetComponent<Image>().sprite = _active;
             GetComponent<Button>().interactable = true;
         }
         else
         {
             SetStars(0);
+            GetComponent<Image>().sprite = _inactive;
             GetComponent<Button>().interactable = false;
         }
     }
