@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe08245087614f4285c974d4c3702c5, type: 3}
+  m_Name: Prazoki
+  m_EditorClassIdentifier: 
+  RecipeName: Prazoki
+  Sprite: {fileID: 21300000, guid: 21436e07e97877b4199a55bbd0702763, type: 3}
+  ServedSprite: {fileID: 21300000, guid: a16e49ef2906de040884281d68dd51cd, type: 3}
+  Ingredient1: {fileID: 11400000, guid: b3f275f1531db8d4bb43bb897f7d7d8a, type: 2}
+  Ingredient2: {fileID: 11400000, guid: 3aa1bef0c3328fc40bd82e05e5b1321d, type: 2}
+  Ingredient3: {fileID: 11400000, guid: 65c36492a3854d44eb5882512ba04689, type: 2}

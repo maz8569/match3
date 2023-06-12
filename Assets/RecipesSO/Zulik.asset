@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe08245087614f4285c974d4c3702c5, type: 3}
   m_Name: Zulik
   m_EditorClassIdentifier: 
-  RecipeName: "\u017Bulik"
-  Sprite: {fileID: 0}
-  ServedSprite: {fileID: 0}
-  Ingredient1: {fileID: 0}
-  Ingredient2: {fileID: 0}
+  RecipeName: Zulik
+  Sprite: {fileID: 21300000, guid: ed3c08a0ca811da458ae6e80c1a8d238, type: 3}
+  ServedSprite: {fileID: 21300000, guid: cc452c9f73637f344bc0107a6aa070e5, type: 3}
+  Ingredient1: {fileID: 11400000, guid: fb1b661f5f2b5a0449949a421250e643, type: 2}
+  Ingredient2: {fileID: 11400000, guid: 3aa1bef0c3328fc40bd82e05e5b1321d, type: 2}
   Ingredient3: {fileID: 0}

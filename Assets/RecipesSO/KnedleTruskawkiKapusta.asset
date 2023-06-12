@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe08245087614f4285c974d4c3702c5, type: 3}
+  m_Name: KnedleTruskawkiKapusta
+  m_EditorClassIdentifier: 
+  RecipeName: Knedle z truskawkami i kapusta
+  Sprite: {fileID: 21300000, guid: ab051e4ad3fc95f4d8fa112d8ee4f832, type: 3}
+  ServedSprite: {fileID: 21300000, guid: 67fa4b592528e6e48ada0a344192e65c, type: 3}
+  Ingredient1: {fileID: 11400000, guid: b3f275f1531db8d4bb43bb897f7d7d8a, type: 2}
+  Ingredient2: {fileID: 11400000, guid: 48eef97e5b3d4154b8cbfc3e66027aff, type: 2}
+  Ingredient3: {fileID: 11400000, guid: 3bb730cc3ba3d2941a393fca70cd8433, type: 2}

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe08245087614f4285c974d4c3702c5, type: 3}
+  m_Name: Wodzianka
+  m_EditorClassIdentifier: 
+  RecipeName: Wodzianka
+  Sprite: {fileID: 21300000, guid: 23bc5d99e37fa114c98bf027fab31108, type: 3}
+  ServedSprite: {fileID: 21300000, guid: 9a6c4f4fa73726d4f961fcb3636452bc, type: 3}
+  Ingredient1: {fileID: 11400000, guid: 1411511e55a429c4592e50023f332dc2, type: 2}
+  Ingredient2: {fileID: 11400000, guid: 65c36492a3854d44eb5882512ba04689, type: 2}
+  Ingredient3: {fileID: 11400000, guid: fb1b661f5f2b5a0449949a421250e643, type: 2}
