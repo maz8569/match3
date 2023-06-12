@@ -6,6 +6,7 @@ using TMPro;
 
 public class CookBook : MonoBehaviour
 {
+    [SerializeField] public TextMeshProUGUI _dishName;
     [SerializeField] public List<RecipeSO> _recipes; //TODO: privat with setters
     [SerializeField] private Image _dishImg;
     [SerializeField] private List<GameObject> _dishIngredients;
@@ -21,7 +22,11 @@ public class CookBook : MonoBehaviour
     {
         RecipeSO wantedRecipe = _recipes[recipeNr];
 
-        _dishImg.sprite = wantedRecipe.Sprite;
+        _dishName.text = wantedRecipe.RecipeName;
+
+        _dishImg.sprite = wantedRecipe.ServedSprite;
+
+        _dishDescription.text = wantedRecipe.Description;
 
         if(wantedRecipe.Ingredient1 != null)
         {
@@ -40,6 +45,10 @@ public class CookBook : MonoBehaviour
             _dishIngredients[2].transform.GetChild(1).GetChild(0).GetComponentInChildren<Image>().sprite = wantedRecipe.Ingredient3.Sprite;
             _dishIngredients[2].transform.GetComponentInChildren<TextMeshProUGUI>().text = wantedRecipe.Ingredient3.ItemName;
             _dishIngredients[2].SetActive(true);
+        }
+        else
+        {
+           _dishIngredients[2].SetActive(false); 
         }
 
         //TODO: dish description

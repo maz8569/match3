@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe08245087614f4285c974d4c3702c5, type: 3}
   m_Name: KnedleTruskawki
   m_EditorClassIdentifier: 
-  RecipeName: Knedle z Truskawkami
+  RecipeName: Knedle z truskawkami
   Sprite: {fileID: 21300000, guid: 3295f466f42456d4cbfcfeecf69ad5a2, type: 3}
   ServedSprite: {fileID: 21300000, guid: fd1f5d0fdc7927a40ad0c87ce6ee4975, type: 3}
   Ingredient1: {fileID: 11400000, guid: b3f275f1531db8d4bb43bb897f7d7d8a, type: 2}
   Ingredient2: {fileID: 11400000, guid: 48eef97e5b3d4154b8cbfc3e66027aff, type: 2}
   Ingredient3: {fileID: 0}
+  Description: Knedle z truskawkami are made of potatoes and strawberries

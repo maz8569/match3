@@ -18,3 +18,4 @@ MonoBehaviour:
   Ingredient1: {fileID: 11400000, guid: fb1b661f5f2b5a0449949a421250e643, type: 2}
   Ingredient2: {fileID: 11400000, guid: 3aa1bef0c3328fc40bd82e05e5b1321d, type: 2}
   Ingredient3: {fileID: 0}
+  Description: Zulik is made of bread and flour

@@ -18,3 +18,5 @@ MonoBehaviour:
   Ingredient1: {fileID: 11400000, guid: b3f275f1531db8d4bb43bb897f7d7d8a, type: 2}
   Ingredient2: {fileID: 11400000, guid: 48eef97e5b3d4154b8cbfc3e66027aff, type: 2}
   Ingredient3: {fileID: 11400000, guid: 3bb730cc3ba3d2941a393fca70cd8433, type: 2}
+  Description: Knedle z truskawkami i kapusta are made of potatoes, strawberries
+    and cabbage

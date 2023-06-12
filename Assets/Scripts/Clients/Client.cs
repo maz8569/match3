@@ -50,7 +50,12 @@ public class Client : MonoBehaviour
         }
         if(desiredDish.Ingredient3 != null)
         {
+            plate.transform.GetChild(2).gameObject.SetActive(true);
             plate.transform.GetChild(2).GetComponent<Image>().sprite = desiredDish.Ingredient3.Sprite; //TODO: check for exceptions
+        }
+        else
+        {
+            plate.transform.GetChild(2).gameObject.SetActive(false);
         }
     }
 

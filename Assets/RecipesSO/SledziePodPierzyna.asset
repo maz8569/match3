@@ -18,3 +18,4 @@ MonoBehaviour:
   Ingredient1: {fileID: 11400000, guid: a7e8c1c1ee13eb940b3be9eec1fe0d6c, type: 2}
   Ingredient2: {fileID: 11400000, guid: b3f275f1531db8d4bb43bb897f7d7d8a, type: 2}
   Ingredient3: {fileID: 0}
+  Description: Sledzie pod pierzyna are made of herrings and potatoes

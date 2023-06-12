@@ -12,6 +12,7 @@ public class RecipeSO : ScriptableObject
     public ItemSO Ingredient1;
     public ItemSO Ingredient2;
     public ItemSO Ingredient3;
+    public string Description;
 
     public List<ItemSO> GetItemList()
     {

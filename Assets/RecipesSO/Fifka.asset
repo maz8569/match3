@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RecipeName: Fifka
   Sprite: {fileID: 21300000, guid: 7de35649484ea30409a59f738fe2f909, type: 3}
-  ServedSprite: {fileID: 21300000, guid: eea3a9142c5646645a3cf874edde4238, type: 3}
+  ServedSprite: {fileID: 21300000, guid: 7de35649484ea30409a59f738fe2f909, type: 3}
   Ingredient1: {fileID: 11400000, guid: 1411511e55a429c4592e50023f332dc2, type: 2}
   Ingredient2: {fileID: 11400000, guid: 206cfeeef4567a549b388b1019b78daf, type: 2}
   Ingredient3: {fileID: 0}
+  Description: Fifka is made of broth and semolina

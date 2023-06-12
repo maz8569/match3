@@ -1114,9 +1114,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943c5cb44a096d541849fd6e59f18a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dishName: {fileID: 5986907020008435527}
   _recipes:
-  - {fileID: 11400000, guid: 00858830d5f4735418a3fca0fd05ff63, type: 2}
-  - {fileID: 11400000, guid: 0b07569e171cc924e8cf98ff234197a7, type: 2}
+  - {fileID: 11400000, guid: 64d05414548e1d44a8ad0505e19bd10f, type: 2}
+  - {fileID: 11400000, guid: 641f1a14ef205014a94824cff014cf55, type: 2}
+  - {fileID: 11400000, guid: 177c34e50a139414598217f784644199, type: 2}
+  - {fileID: 11400000, guid: 3cfd4003fd318ab4095e15034cad69d5, type: 2}
+  - {fileID: 11400000, guid: 77e05e8c2f6b88c4bae44183dc392830, type: 2}
+  - {fileID: 11400000, guid: 2883f494c66f536418f8ad2daa9b5380, type: 2}
+  - {fileID: 11400000, guid: 2346bb1b82e6d2343bf7cf456d212339, type: 2}
+  - {fileID: 11400000, guid: d9afa297af812b3428adce1363cae34a, type: 2}
+  - {fileID: 11400000, guid: b061bb41744c3054b99fac87538d3a65, type: 2}
+  - {fileID: 11400000, guid: 03a7f9f43b4044940a3fa9cd76a06a1d, type: 2}
   _dishImg: {fileID: 5986907018409010384}
   _dishIngredients:
   - {fileID: 5986907019747262906}
@@ -1484,7 +1493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -2, y: -198.5}
+  m_AnchoredPosition: {x: -1.5, y: -173}
   m_SizeDelta: {x: 256, y: 255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5986907018409010391
