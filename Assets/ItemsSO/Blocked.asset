@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Blocked
   m_EditorClassIdentifier: 
   ItemName: Blocked
-  Sprite: {fileID: 21300000, guid: 435815d4a921661488415eb09bea2551, type: 3}
+  Sprite: {fileID: 21300000, guid: 4b6976a675a6218499d44ba9c8c64cf6, type: 3}
