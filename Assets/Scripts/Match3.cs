@@ -529,7 +529,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
         }
         else
         {
-            levelData.checkedStars.Add(levelNumber, checkedStars);
+            if (checkedStars > 0) levelData.checkedStars.Add(levelNumber, checkedStars);
         }
     }
 
