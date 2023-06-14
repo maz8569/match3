@@ -43,6 +43,13 @@ public class DataPersistenceManager : MonoBehaviour
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
     }
 
+    public void Restart()
+    {
+        InitializeLevel();
+        dataHandler.Save(levelData);
+        PushLoaded();
+    }
+
     public void InitializeLevel()
     {
         levelData = new LevelData();

@@ -78,6 +78,7 @@ public class LevelSelectionButton : MonoBehaviour, IDataPesristence
         {
             GetComponent<Image>().sprite = _active;
             GetComponent<Button>().interactable = true;
+            SetStars(0);
         }
         else
         {
