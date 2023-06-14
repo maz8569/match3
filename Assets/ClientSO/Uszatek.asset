@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b718d67cbe9c014e83c11ba5d888626, type: 3}
+  m_Name: Uszatek
+  m_EditorClassIdentifier: 
+  clientSprites:
+  - {fileID: 21300000, guid: e2d9a245c555b134bb065e669f6401b3, type: 3}
+  - {fileID: 21300000, guid: 2fe87e949f832bc4bae4ba214e846386, type: 3}
+  - {fileID: 21300000, guid: d0c1712920f3202448857f396d6c24bf, type: 3}
+  - {fileID: 21300000, guid: aa2acf74f0272c04b8934de811c5a341, type: 3}

@@ -753,8 +753,8 @@ Transform:
   m_GameObject: {fileID: 3353207458875984492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.16, y: 0.16, z: 0.16}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3353207458874779537}
   - {fileID: 3353207458813979835}
@@ -802,7 +802,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2d9a245c555b134bb065e669f6401b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -828,4 +828,6 @@ MonoBehaviour:
   diningHall: {fileID: 0}
   state: 0
   _match3: {fileID: 0}
-  _progressBar: {fileID: 3353207457169228424}
+  plate: {fileID: 0}
+  cloud: {fileID: 0}
+  dish: {fileID: 0}

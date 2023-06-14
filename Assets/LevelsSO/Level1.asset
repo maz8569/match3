@@ -178,3 +178,7 @@ MonoBehaviour:
   - 0.2
   - 0.6
   - 1
+  clients:
+  - {fileID: 11400000, guid: e3014edc49579864f9cb3f4972f5a9d2, type: 2}
+  - {fileID: 11400000, guid: ee946ac2a8a6a7947881a4d1bc4e46c0, type: 2}
+  - {fileID: 11400000, guid: e838625cb7199f8499293c90475c3611, type: 2}

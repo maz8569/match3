@@ -561,6 +561,10 @@ PrefabInstance:
       propertyPath: dayNr
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2296732167487428579, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
+      propertyPath: levelNr
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2296732167487428588, guid: 125e8b75cedad7c4eb005301f4af7b12, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

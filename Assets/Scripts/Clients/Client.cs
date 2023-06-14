@@ -20,6 +20,7 @@ public class Client : MonoBehaviour
     public GameObject plate;
     public GameObject cloud;
     public GameObject dish;
+    public ClientSO client;
 
     private bool _served = false;
 
@@ -67,15 +68,13 @@ public class Client : MonoBehaviour
             state = _waitingTime / PATIENCE;
 
             if(_served){
-                GetComponent<SpriteRenderer>().color = Color.blue;
-            } else if(state < 0.01f){ //TODO: magic numbers
-                GetComponent<SpriteRenderer>().color = Color.black;
+                GetComponent<SpriteRenderer>().sprite = client.clientSprites[3];
             } else if(state < 0.2f){ //TODO: magic numbers
-                GetComponent<SpriteRenderer>().color = Color.red;
+                GetComponent<SpriteRenderer>().sprite = client.clientSprites[2];
             } else if(state < 0.5f){ //TODO: magic numbers
-                GetComponent<SpriteRenderer>().color = Color.yellow;
+                GetComponent<SpriteRenderer>().sprite = client.clientSprites[1];
             } else{
-                GetComponent<SpriteRenderer>().color = Color.green;
+                GetComponent<SpriteRenderer>().sprite = client.clientSprites[0];
             }
             
             yield return new WaitForSeconds(0.1f);//TODO: magic numbers

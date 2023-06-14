@@ -39,9 +39,9 @@ public class DiningHall : MonoBehaviour
         _clients = new List<Client>();
 
         //TODO: magic numbers
-        _seats[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.2f, Screen.height * 0.7f, 0.0f));
-        _seats[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.5f, Screen.height * 0.7f, 0.0f));
-        _seats[2].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.8f, Screen.height * 0.7f, 0.0f));
+        _seats[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.2f, Screen.height * 0.68f, 0.0f));
+        _seats[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.5f, Screen.height * 0.68f, 0.0f));
+        _seats[2].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.8f, Screen.height * 0.68f, 0.0f));
 
         StartCoroutine(InitializeClients());
 
@@ -110,6 +110,7 @@ public class DiningHall : MonoBehaviour
         tmpClient.plate = _plates[seat];
         tmpClient.cloud = _clouds[seat];
         tmpClient.dish = _dishes[seat];
+        tmpClient.client = _match3.levelSO.clients[Random.Range(0, _match3.levelSO.clients.Count)];
 
         _plates[seat].SetActive(true);
 

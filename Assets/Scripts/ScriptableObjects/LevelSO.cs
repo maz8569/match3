@@ -16,6 +16,7 @@ public class LevelSO : ScriptableObject
     public List<RecipeSO> recipes;
     public List<LevelGridPosition> levelGridPositions;
     public List<float> starsScore;
+    public List<ClientSO> clients;
 
     [System.Serializable]
     public class LevelGridPosition
