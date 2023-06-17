@@ -156,6 +156,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
         }
 
         ResetGrid();
+        CheckBoard();
         return false;
     }
 
@@ -201,6 +202,93 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 retVal |= CheckBoardHelper(x - 1, y - 1, depth + 1);
                 retVal |= CheckBoardHelper(x + 1, y - 1, depth + 1);
                 retVal |= CheckBoardHelper(x - 1, y + 1, depth + 1);
+
+                RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
+            }
+        }
+
+        return retVal;
+    }
+
+    /// <summary>
+    /// Checks if there is at least one possible combination for given RecipeSO.
+    /// </summary>
+    /// <param name="recipe">Wanted RecipeSO.</param>
+    public bool CheckBoardForItem(RecipeSO recipe)
+    {
+        bool retVal = false;
+
+        for(int i = 0; i < gridHeight; i++){
+            for(int j = 0; j < gridWidth; j++){
+
+                chosenItems.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1);
+                
+                retVal |= CheckBoardForItemHelper(i + 1, j, 2, recipe);
+                retVal |= CheckBoardForItemHelper(i, j + 1, 2, recipe);
+                retVal |= CheckBoardForItemHelper(i + 1, j + 1, 2, recipe);
+                retVal |= CheckBoardForItemHelper(i - 1, j + 1, 2, recipe);
+                retVal |= CheckBoardForItemHelper(i - 1, j - 1, 2, recipe);
+                retVal |= CheckBoardForItemHelper(i + 1, j - 1, 2, recipe);
+
+                if(retVal)
+                {
+                    return true;
+                }
+
+                chosenItems.Clear();
+                currentRecipe = null;
+                
+            }
+        }
+
+        ResetGrid();
+        CheckBoardForItem(recipe);
+        return false;
+    }
+
+    /// <summary>
+    /// Helper recurrency function for CheckBoardForItem.
+    /// </summary>
+    /// <param name="x">The x-coordinate on the grid.</param>
+    /// <param name="y">The y-coordinate on the grid.</param>
+    /// <param name="depth">The current length of the chain.</param>
+    /// <param name="recipe">Wanted RecipeSO.</param>
+    private bool CheckBoardForItemHelper(int x, int y, int depth, RecipeSO recipe)//TODO: merge with CheckBoard, check diagonally
+    {
+        bool retVal = false;
+
+        if(!IsValidPosition(x, y))
+        {
+            return false;
+        } 
+        else 
+        {
+            AddItemToChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
+
+            if(depth == 3)
+            {
+                CheckRecipe();
+
+                RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
+
+                if(currentRecipe == recipe)
+                {
+                    currentRecipe = null;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                retVal |= CheckBoardForItemHelper(x + 1, y, depth + 1, recipe);
+                retVal |= CheckBoardForItemHelper(x, y + 1, depth + 1, recipe);
+                retVal |= CheckBoardForItemHelper(x + 1, y + 1, depth + 1, recipe);
+                retVal |= CheckBoardForItemHelper(x - 1, y - 1, depth + 1, recipe);
+                retVal |= CheckBoardForItemHelper(x + 1, y - 1, depth + 1, recipe);
+                retVal |= CheckBoardForItemHelper(x - 1, y + 1, depth + 1, recipe);
 
                 RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
             }

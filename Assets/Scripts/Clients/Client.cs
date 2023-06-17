@@ -33,6 +33,8 @@ public class Client : MonoBehaviour
 
         desiredDish = _currentLevel.recipes[random.Next(_currentLevel.recipes.Count)];
 
+        _match3.CheckBoardForItem(desiredDish);
+
         InitializePlate();
 
         StartCoroutine(StartCountdown());

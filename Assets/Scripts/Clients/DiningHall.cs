@@ -30,20 +30,12 @@ public class DiningHall : MonoBehaviour
     public Dictionary<RecipeSO, Dictionary<ItemSO, int>> _recipesSummary; //TODO: make private with getter
     public Dictionary<RecipeSO, int> _dishesSummary;
 
-    void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            _match3.ResetGrid();
-            Debug.Log("space");
-        }
-    }
-
     void Start()
     {
         _recipesSummary = new Dictionary<RecipeSO, Dictionary<ItemSO, int>>();
         _dishesSummary = new Dictionary<RecipeSO, int>();
         _match3.OnMove += ItemChanged;
+        _match3.OnMove += CheckBoard;
 
         _clients = new List<Client>();
 
@@ -111,8 +103,6 @@ public class DiningHall : MonoBehaviour
     {
         GameObject tmp = Instantiate(_clientPrefab, new Vector3(_seats[seat].transform.position.x, _seats[seat].transform.position.y, 0), Quaternion.identity);
 
-        _match3.CheckBoard();
-
         Client tmpClient = tmp.GetComponent<Client>();
         tmpClient._match3 = _match3; //TODO: setters/auto-fetch
         tmpClient._seatNr = seat;
@@ -152,7 +142,7 @@ public class DiningHall : MonoBehaviour
         _clouds[freedSeat].SetActive(false);
         _dishes[freedSeat].SetActive(false);
 
-        Destroy(client.transform.gameObject); //TODO; fix error
+        Destroy(client.transform.gameObject); //TODO: fix error
 
         yield return new WaitForSeconds(_waitTimeBetweenClients);
         StartCoroutine(InstantiateClient(freedSeat));
@@ -189,6 +179,14 @@ public class DiningHall : MonoBehaviour
                 StartCoroutine(DeleteClient(client));
                 return;
             }
+        }
+    }
+
+    public void CheckBoard(object sender, System.EventArgs e)
+    {
+        foreach(Client client in _clients)
+        {
+            _match3.CheckBoardForItem(client.desiredDish);
         }
     }
 }
