@@ -19,24 +19,33 @@ public class SummaryScreen : MonoBehaviour
         {
             dish.SetActiveRecursively(false);
         }
-        
+
         for (int i = 0; i < _match3.levelSO.recipes.Count; i++)
         {
             var tmpDish = _dishes[i];
             tmpDish.SetActiveRecursively(true);
 
-            tmpDish.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _diningHall._dishesSummary[_levelSO.recipes[i]].ToString();
+            if (_diningHall._dishesSummary.ContainsKey(_levelSO.recipes[i]))
+            {
+                tmpDish.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _diningHall._dishesSummary[_levelSO.recipes[i]].ToString();
+            }
             tmpDish.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = _levelSO.recipes[i].ServedSprite;
             
             if (_levelSO.recipes[i].Ingredient1 != null)
             {
                 tmpDish.transform.GetChild(4).GetChild(0).GetComponent<Image>().sprite = _levelSO.recipes[i].Ingredient1.Sprite;
-                tmpDish.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = _diningHall._recipesSummary[_levelSO.recipes[i]][_levelSO.recipes[i].Ingredient1].ToString();
+                if (_diningHall._recipesSummary.ContainsKey(_levelSO.recipes[i]))
+                {
+                    tmpDish.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = _diningHall._recipesSummary[_levelSO.recipes[i]][_levelSO.recipes[i].Ingredient1].ToString();
+                }
             }
             if (_levelSO.recipes[i].Ingredient2 != null)
             {
                 tmpDish.transform.GetChild(7).GetChild(0).GetComponent<Image>().sprite = _levelSO.recipes[i].Ingredient2.Sprite;
-                tmpDish.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = _diningHall._recipesSummary[_levelSO.recipes[i]][_levelSO.recipes[i].Ingredient2].ToString();
+                if (_diningHall._recipesSummary.ContainsKey(_levelSO.recipes[i]))
+                {
+                    tmpDish.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = _diningHall._recipesSummary[_levelSO.recipes[i]][_levelSO.recipes[i].Ingredient2].ToString();
+                }
             }
         }
     }
