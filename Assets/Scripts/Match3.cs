@@ -128,7 +128,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
     /// <summary>
     /// Checks if there is at least one legal combination in the grid.
     /// </summary>
-    private bool CheckBoard() //TODO: optimize (ignore already checked combinations)
+    public bool CheckBoard() //TODO: optimize (ignore already checked combinations)
     {
         bool retVal = false;
 
@@ -139,6 +139,10 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 
                 retVal |= CheckBoardHelper(i + 1, j, 2);
                 retVal |= CheckBoardHelper(i, j + 1, 2);
+                retVal |= CheckBoardHelper(i + 1, j + 1, 2);
+                retVal |= CheckBoardHelper(i - 1, j + 1, 2);
+                retVal |= CheckBoardHelper(i - 1, j - 1, 2);
+                retVal |= CheckBoardHelper(i + 1, j - 1, 2);
 
                 if(retVal)
                 {
@@ -151,6 +155,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
             }
         }
 
+        ResetGrid();
         return false;
     }
 
@@ -192,12 +197,41 @@ public class Match3 : MonoBehaviour, IDataPesristence
             {
                 retVal |= CheckBoardHelper(x + 1, y, depth + 1);
                 retVal |= CheckBoardHelper(x, y + 1, depth + 1);
+                retVal |= CheckBoardHelper(x + 1, y + 1, depth + 1);
+                retVal |= CheckBoardHelper(x - 1, y - 1, depth + 1);
+                retVal |= CheckBoardHelper(x + 1, y - 1, depth + 1);
+                retVal |= CheckBoardHelper(x - 1, y + 1, depth + 1);
 
                 RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
             }
         }
 
         return retVal;
+    }
+
+    /// <summary>
+    /// Rerolls items in grid.
+    /// </summary>
+    public void ResetGrid()
+    {
+        for(int x = 0; x < gridWidth; x++)
+        {
+            for(int y = 0; y < gridHeight; y++)
+            {
+                ItemSO item = levelSO.levelGridPositions.Find(gridPos => gridPos.x == x && gridPos.y == y)?.itemSO;
+
+                if(item.name != "Blocked")
+                {
+                grid.GetGridObject(x, y).DestroyItem();
+                OnItemPositionDestroyed?.Invoke(grid.GetGridObject(x, y), EventArgs.Empty);
+                grid.GetGridObject(x, y).ClearItemGrid();
+                }
+
+                
+            }
+        }
+
+        SpawnNewMissingItems();
     }
 
     private void RemoveItemFromChosenList(ItemSO item)

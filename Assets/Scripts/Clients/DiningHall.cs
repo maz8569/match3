@@ -30,6 +30,15 @@ public class DiningHall : MonoBehaviour
     public Dictionary<RecipeSO, Dictionary<ItemSO, int>> _recipesSummary; //TODO: make private with getter
     public Dictionary<RecipeSO, int> _dishesSummary;
 
+    void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            _match3.ResetGrid();
+            Debug.Log("space");
+        }
+    }
+
     void Start()
     {
         _recipesSummary = new Dictionary<RecipeSO, Dictionary<ItemSO, int>>();
@@ -102,6 +111,8 @@ public class DiningHall : MonoBehaviour
     {
         GameObject tmp = Instantiate(_clientPrefab, new Vector3(_seats[seat].transform.position.x, _seats[seat].transform.position.y, 0), Quaternion.identity);
 
+        _match3.CheckBoard();
+
         Client tmpClient = tmp.GetComponent<Client>();
         tmpClient._match3 = _match3; //TODO: setters/auto-fetch
         tmpClient._seatNr = seat;
@@ -113,6 +124,7 @@ public class DiningHall : MonoBehaviour
         tmpClient.client = _match3.levelSO.clients[Random.Range(0, _match3.levelSO.clients.Count)];
 
         _plates[seat].SetActive(true);
+        _clouds[seat].SetActiveRecursively(true);
 
         _clients.Add(tmp.GetComponent<Client>());
         yield return null;
@@ -124,8 +136,8 @@ public class DiningHall : MonoBehaviour
 
         if (client.IsServed())
         {
-        //_clouds[freedSeat].transform.GetChild(0).GetComponent<Image>().sprite = client.desiredDish.Sprite;
-        //_clouds[freedSeat].SetActive(true);
+        _clouds[freedSeat].transform.GetChild(0).GetComponent<Image>().sprite = client.desiredDish.Sprite;
+        _clouds[freedSeat].SetActive(true);
         
         _plates[freedSeat].SetActive(false);
         _dishes[freedSeat].GetComponent<Image>().sprite = client.desiredDish.ServedSprite;
