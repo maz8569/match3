@@ -49,6 +49,8 @@ public class Match3 : MonoBehaviour, IDataPesristence
 
     private RecipeSO currentRecipe;
 
+    public RecipeSO CurrentRecipe { get { return currentRecipe; } private set { CurrentRecipe = value; } }
+
     private List<int2> possibleMoves;
     private List<int2> chosenItemsPos;
     private Dictionary<ItemSO, int> chosenItems;

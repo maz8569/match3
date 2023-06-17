@@ -130,7 +130,7 @@ public class Match3Visual : MonoBehaviour
 
     private void DragCancelled(object sender, System.EventArgs e)
     {
-        if(match3.GetChosenItemsPositionCount() > 2)
+        if(match3.GetChosenItemsPositionCount() > 2 && match3.CurrentRecipe != null)
         {
             match3.CalculateScore();
             match3.DestroyChosenItems();
