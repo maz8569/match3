@@ -11,6 +11,6 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        _levelNr.text = _match3.levelSO.name;
+        _levelNr.text = "Level " + (ProgressManager.Instance.CurrentWeek * ProgressManager.Instance.currentDay);
     }
 }

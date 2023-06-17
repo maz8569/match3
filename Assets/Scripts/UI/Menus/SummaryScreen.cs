@@ -15,6 +15,11 @@ public class SummaryScreen : MonoBehaviour
     public void Activate()
     {   
         _levelSO = _match3.levelSO;
+        foreach(GameObject dish in _dishes)
+        {
+            dish.SetActiveRecursively(false);
+        }
+        
         for (int i = 0; i < _match3.levelSO.recipes.Count; i++)
         {
             var tmpDish = _dishes[i];
