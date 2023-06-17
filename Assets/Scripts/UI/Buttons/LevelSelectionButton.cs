@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelSelectionButton : MonoBehaviour, IDataPesristence
 {
     [SerializeField] private int dayNr;
     [SerializeField] private int levelNr;
     [SerializeField] private GameObject _stars;
+    [SerializeField] private TextMeshProUGUI _weekday;
     [SerializeField] private Sprite _active;
     [SerializeField] private Sprite _inactive;
 
@@ -71,18 +73,21 @@ public class LevelSelectionButton : MonoBehaviour, IDataPesristence
         if (levelData.checkedStars.ContainsKey(levelNr))
         {
             SetStars(levelData.checkedStars[levelNr]);
+            _weekday.color = Color.black;
             GetComponent<Image>().sprite = _active;
             GetComponent<Button>().interactable = true;
         }
         else if(levelData.checkedStars.ContainsKey(levelNr - 1) || levelNr == 1)
         {
+            SetStars(0);
+            _weekday.color = Color.black;
             GetComponent<Image>().sprite = _active;
             GetComponent<Button>().interactable = true;
-            SetStars(0);
         }
         else
         {
             SetStars(0);
+            _weekday.color = Color.gray;
             GetComponent<Image>().sprite = _inactive;
             GetComponent<Button>().interactable = false;
         }

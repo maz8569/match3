@@ -438,6 +438,7 @@ MonoBehaviour:
   dayNr: 0
   levelNr: 1
   _stars: {fileID: 6721681824644884904}
+  _weekday: {fileID: 2296732167088384237}
   _active: {fileID: 21300000, guid: 4888d5a08246cec4fa9ad0af964ef440, type: 3}
   _inactive: {fileID: 21300000, guid: 6b91b3d1766fdc740a02d02245a17cf3, type: 3}
   starsImg:
