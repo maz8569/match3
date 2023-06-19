@@ -124,11 +124,8 @@ public class DiningHall : MonoBehaviour
     {
         int freedSeat = client._seatNr;
 
-        if (client.IsServed())
-        {
-        _clouds[freedSeat].transform.GetChild(0).GetComponent<Image>().sprite = client.desiredDish.Sprite;
-        _clouds[freedSeat].SetActive(true);
-        
+        if(client.IsServed())
+        {        
         _plates[freedSeat].SetActive(false);
         _dishes[freedSeat].GetComponent<Image>().sprite = client.desiredDish.ServedSprite;
         _dishes[freedSeat].SetActive(true);

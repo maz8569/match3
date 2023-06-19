@@ -1964,6 +1964,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 864602779}
     m_Modifications:
+    - target: {fileID: 3789140591935559740, guid: b39f406e52c12bb45b992ca1e137601d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -48.099976
+      objectReference: {fileID: 0}
     - target: {fileID: 5986907018136616369, guid: b39f406e52c12bb45b992ca1e137601d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3109,6 +3113,9 @@ MonoBehaviour:
   levelScriptableObjs:
   - {fileID: 11400000, guid: f645c34c0f242b04897f1eff188ad008, type: 2}
   - {fileID: 11400000, guid: 3b43e382e0d2b1f499b7d99b69da218d, type: 2}
+  - {fileID: 11400000, guid: 479bfe011f9b31b438c68e3ca2aa3f12, type: 2}
+  - {fileID: 11400000, guid: 2a83fc8afbee1a9489fa672c2d56555e, type: 2}
+  - {fileID: 11400000, guid: 48119a30b12b80a49bde7c4e41260283, type: 2}
 --- !u!4 &1662936800
 Transform:
   m_ObjectHideFlags: 0

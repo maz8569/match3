@@ -45,20 +45,29 @@ public class Client : MonoBehaviour
     {
         if(desiredDish.Ingredient1 != null)
         {
-            plate.transform.GetChild(0).GetComponent<Image>().sprite = desiredDish.Ingredient1.Sprite; //TODO: check for exceptions
+            //plate.transform.GetChild(0).GetComponent<Image>().sprite = desiredDish.Ingredient1.Sprite; //TODO: check for exceptions
+
+            cloud.transform.GetChild(0).GetComponent<Image>().sprite = desiredDish.Ingredient1.Sprite; //TODO: check for exceptions
         }
         if(desiredDish.Ingredient2 != null)
         {
-            plate.transform.GetChild(1).GetComponent<Image>().sprite = desiredDish.Ingredient2.Sprite; //TODO: check for exceptions
+            //plate.transform.GetChild(1).GetComponent<Image>().sprite = desiredDish.Ingredient2.Sprite; //TODO: check for exceptions
+
+            cloud.transform.GetChild(1).GetComponent<Image>().sprite = desiredDish.Ingredient2.Sprite; //TODO: check for exceptions
         }
         if(desiredDish.Ingredient3 != null)
         {
-            plate.transform.GetChild(2).gameObject.SetActive(true);
-            plate.transform.GetChild(2).GetComponent<Image>().sprite = desiredDish.Ingredient3.Sprite; //TODO: check for exceptions
+            //plate.transform.GetChild(2).gameObject.SetActive(true);
+            //plate.transform.GetChild(2).GetComponent<Image>().sprite = desiredDish.Ingredient3.Sprite; //TODO: check for exceptions
+
+            cloud.transform.GetChild(2).gameObject.SetActive(true);
+            cloud.transform.GetChild(2).GetComponent<Image>().sprite = desiredDish.Ingredient3.Sprite; //TODO: check for exceptions
         }
         else
         {
-            plate.transform.GetChild(2).gameObject.SetActive(false);
+            //plate.transform.GetChild(2).gameObject.SetActive(false);
+
+            cloud.transform.GetChild(2).gameObject.SetActive(false);
         }
     }
 
