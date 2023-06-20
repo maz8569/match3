@@ -53,6 +53,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
 
     private List<int2> possibleMoves;
     private List<int2> chosenItemsPos;
+    private List<int2> chosenItemsPosHelper; //TODO: use chosenItemsPos
     private Dictionary<ItemSO, int> chosenItems;
 
     private int levelNumber;
@@ -63,6 +64,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
     {
         possibleMoves = new List<int2>();
         chosenItemsPos = new List<int2>();
+        chosenItemsPosHelper = new List<int2>();
         chosenItems = new Dictionary<ItemSO, int>();
     }
 
@@ -138,6 +140,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
             for(int j = 0; j < gridWidth; j++){
 
                 chosenItems.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1);
+                chosenItemsPosHelper.Add(new int2(i, j));
                 
                 retVal |= CheckBoardHelper(i + 1, j, 2);
                 retVal |= CheckBoardHelper(i, j + 1, 2);
@@ -152,6 +155,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 }
 
                 chosenItems.Clear();
+                chosenItemsPosHelper.Clear();
                 currentRecipe = null;
                 
             }
@@ -172,7 +176,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
     {
         bool retVal = false;
 
-        if(!IsValidPosition(x, y))
+        if(!IsValidPosition(x, y) || chosenItemsPosHelper.Contains(new int2(x,y)))
         {
             return false;
         } 
@@ -185,6 +189,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 CheckRecipe();
 
                 RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
+                chosenItemsPosHelper.Remove(new int2(x, y));
 
                 if(currentRecipe != null)
                 {
@@ -206,6 +211,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 retVal |= CheckBoardHelper(x - 1, y + 1, depth + 1);
 
                 RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
+                chosenItemsPosHelper.Remove(new int2(x, y));
             }
         }
 
@@ -224,7 +230,8 @@ public class Match3 : MonoBehaviour, IDataPesristence
             for(int j = 0; j < gridWidth; j++){
 
                 chosenItems.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1);
-                
+                chosenItemsPosHelper.Add(new int2(i, j));
+
                 retVal |= CheckBoardForItemHelper(i + 1, j, 2, recipe);
                 retVal |= CheckBoardForItemHelper(i, j + 1, 2, recipe);
                 retVal |= CheckBoardForItemHelper(i + 1, j + 1, 2, recipe);
@@ -238,6 +245,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 }
 
                 chosenItems.Clear();
+                chosenItemsPosHelper.Clear();
                 currentRecipe = null;
                 
             }
@@ -259,7 +267,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
     {
         bool retVal = false;
 
-        if(!IsValidPosition(x, y))
+        if(!IsValidPosition(x, y) || chosenItemsPosHelper.Contains(new int2(x,y)))
         {
             return false;
         } 
@@ -272,9 +280,11 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 CheckRecipe();
 
                 RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
+                chosenItemsPosHelper.Remove(new int2(x, y));
 
                 if(currentRecipe == recipe)
                 {
+
                     currentRecipe = null;
                     return true;
                 }
@@ -293,6 +303,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 retVal |= CheckBoardForItemHelper(x - 1, y + 1, depth + 1, recipe);
 
                 RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
+                chosenItemsPosHelper.Remove(new int2(x, y));
             }
         }
 

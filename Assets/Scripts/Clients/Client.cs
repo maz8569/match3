@@ -35,6 +35,8 @@ public class Client : MonoBehaviour
 
         _match3.CheckBoardForItem(desiredDish);
 
+        diningHall.CheckBoard(null, null);
+
         InitializePlate();
 
         StartCoroutine(StartCountdown());
