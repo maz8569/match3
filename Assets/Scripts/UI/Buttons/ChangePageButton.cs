@@ -39,6 +39,7 @@ public class ChangePageButton : MonoBehaviour
 
     public void OnTap()
     {
+        AudioPlayer.Instance.Play(Clip.PAGE_FLIP);
         ChangePage();
     }
 }
