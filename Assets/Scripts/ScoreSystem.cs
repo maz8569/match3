@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,11 @@ public class ScoreSystem : MonoBehaviour
     [SerializeField] private List<RectTransform> stars;
     [SerializeField] private Sprite filledStar;
     [SerializeField] private Sprite unfilledStar;
+
+    private float _starZoomDuration;
+    private float _scaleModifier = 1;
+    public float lerpDuration = 0.2f;
+    public float targetScale = 1.2f;
 
     private void Start()
     {
@@ -37,6 +43,7 @@ public class ScoreSystem : MonoBehaviour
         {
             if(i < e.checkedStars)
             {
+                StartCoroutine(FillStar(stars[i]));
                 stars[i].gameObject.GetComponent<Image>().sprite = filledStar;
             }
             else
@@ -46,6 +53,26 @@ public class ScoreSystem : MonoBehaviour
         }
 
         progressBarFill.fillAmount = e.progress;
+    }
+
+    public IEnumerator FillStar(RectTransform star)
+    {
+        Debug.Log(star.name);
+        float time = 0;
+        float startValue = _scaleModifier;
+        Vector3 startScale = transform.localScale;
+
+        while (time < _starZoomDuration)
+        {
+            _scaleModifier = Mathf.Lerp(startValue, targetScale, time / lerpDuration);
+            star.localScale = startScale * _scaleModifier;
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        star.localScale = startScale * targetScale;
+        _scaleModifier = targetScale;
+
     }
 
 }
