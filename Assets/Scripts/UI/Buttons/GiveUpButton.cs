@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GiveUpButton : MonoBehaviour
+public class GiveUpButton : DefaultButton
 {
     private void GiveUp()
     {
@@ -12,6 +12,7 @@ public class GiveUpButton : MonoBehaviour
 
     public void OnClick()
     {
+        PlayPressedSound();
         GiveUp();
         Time.timeScale = 1;
     }

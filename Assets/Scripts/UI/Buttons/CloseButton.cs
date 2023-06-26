@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CloseButton : MonoBehaviour
+public class CloseButton : DefaultButton
 {
     [SerializeField] private GameObject _shade;
     [SerializeField] private GameObject _view;
@@ -26,6 +26,7 @@ public class CloseButton : MonoBehaviour
 
     public void OnTap()
     {
+        PlayPressedSound();
         Time.timeScale = 1;
         Close();
     }

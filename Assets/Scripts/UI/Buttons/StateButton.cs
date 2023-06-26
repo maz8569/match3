@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StateButton : MonoBehaviour //TODO: better name
+public class StateButton : DefaultButton //TODO: better name
 {
     [SerializeField] protected Sprite _buttonOn;
     [SerializeField] protected Sprite _buttonOff;
@@ -20,4 +20,17 @@ public class StateButton : MonoBehaviour //TODO: better name
             _buttonImg.sprite = _buttonOff;
         }
     }
+
+    protected void ChangeImg(bool val)
+    {
+        if(val)
+        {
+           _buttonImg.sprite = _buttonOn; 
+        }
+        else
+        {
+            _buttonImg.sprite = _buttonOff;
+        }
+    }
+
 }

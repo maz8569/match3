@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum Clip
 {
-    PAGE_FLIP
+    PAGE_FLIP,
+    BUTTON_PRESS
 }
 
 public class AudioPlayer : MonoBehaviour
@@ -13,6 +14,7 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
 
     private const float BASE_VOLUME = 1.0f;
+    public bool audioMuted = false;
 
     public static AudioPlayer Instance { get; private set; }
     private void Awake() 
@@ -30,8 +32,12 @@ public class AudioPlayer : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
     }
-    public void Play(Clip clip, float volume = BASE_VOLUME)
+
+    public void PlayAudio(Clip clip, float volume = BASE_VOLUME)
     {
-        _audioSource.PlayOneShot(_clips[(int)clip], volume);
+        if (!audioMuted)
+        {
+            _audioSource.PlayOneShot(_clips[(int)clip], volume);
+        }
     }
 }

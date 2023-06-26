@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContinueButton : MonoBehaviour
+public class ContinueButton : DefaultButton
 {
     private void UnpauseTime()
     {
@@ -16,6 +16,7 @@ public class ContinueButton : MonoBehaviour
 
     public void OnTouch()
     {
+        PlayPressedSound();
         UnpauseTime();
         CloseMenu();
     }

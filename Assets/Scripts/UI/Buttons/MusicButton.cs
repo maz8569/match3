@@ -11,6 +11,7 @@ public class MusicButton : StateButton
 
     public void OnTap()
     {
+        PlayPressedSound();
         TurnMusicOn();
         ChangeImg();
     }

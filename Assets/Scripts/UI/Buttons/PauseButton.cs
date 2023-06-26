@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseButton : MonoBehaviour
+public class PauseButton : DefaultButton
 {
     [SerializeField] private GameObject _pauseMenu;
 
@@ -13,8 +13,8 @@ public class PauseButton : MonoBehaviour
 
     public void OnTouch()
     {
+        PlayPressedSound();
         _pauseMenu.SetActive(true);
-        //gameObject.SetActive(false);
         PauseTime();
     }
 }

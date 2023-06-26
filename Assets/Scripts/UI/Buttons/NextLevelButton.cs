@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NextLevelButton : MonoBehaviour
+public class NextLevelButton : DefaultButton
 {
     private void LoadNextLevel()
     {
@@ -12,6 +12,7 @@ public class NextLevelButton : MonoBehaviour
 
     public void OnTap()
     {
+        PlayPressedSound();
         SceneManager.LoadSceneAsync(0);
     }
 }

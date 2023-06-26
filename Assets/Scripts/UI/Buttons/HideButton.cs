@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HideButton : MonoBehaviour
+public class HideButton : DefaultButton
 {
     [SerializeField] private GameObject _thisVisual;
     [SerializeField] private GameObject _otherVisual;
@@ -15,6 +15,7 @@ public class HideButton : MonoBehaviour
 
     public void OnTap()
     {
+        PlayPressedSound();
         Hide();
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangeWeekButton : MonoBehaviour
+public class ChangeWeekButton : DefaultButton
 {
     [SerializeField] private bool _previous;
     [SerializeField] private WeekMenu _weekMenu;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangePageButton : MonoBehaviour
+public class ChangePageButton : DefaultButton
 {
     [SerializeField] private bool _previous;
 
@@ -39,7 +39,7 @@ public class ChangePageButton : MonoBehaviour
 
     public void OnTap()
     {
-        AudioPlayer.Instance.Play(Clip.PAGE_FLIP);
+        AudioPlayer.Instance.PlayAudio(Clip.PAGE_FLIP);
         ChangePage();
     }
 }
