@@ -160,6 +160,10 @@ public class DiningHall : MonoBehaviour
                     _recipesSummary.Add(client.desiredDish, new Dictionary<ItemSO, int>());
                     _recipesSummary[client.desiredDish].Add(client.desiredDish.Ingredient1, _match3.GetSelectedItems()[client.desiredDish.Ingredient1]);
                     _recipesSummary[client.desiredDish].Add(client.desiredDish.Ingredient2, _match3.GetSelectedItems()[client.desiredDish.Ingredient2]);
+                    if (client.desiredDish.Ingredient3 != null)
+                    {
+                        _recipesSummary[client.desiredDish].Add(client.desiredDish.Ingredient3, _match3.GetSelectedItems()[client.desiredDish.Ingredient3]);
+                    }
                     _dishesSummary.Add(client.desiredDish, 1);
                 }
                 else
@@ -167,6 +171,11 @@ public class DiningHall : MonoBehaviour
                     _recipesSummary[client.desiredDish][client.desiredDish.Ingredient1] += _match3.GetSelectedItems()[client.desiredDish.Ingredient1]; //TODO: fix this absolute garbage
                     
                     _recipesSummary[client.desiredDish][client.desiredDish.Ingredient2] += _match3.GetSelectedItems()[client.desiredDish.Ingredient2];
+
+                    if (client.desiredDish.Ingredient3 != null)
+                    {
+                        _recipesSummary[client.desiredDish][client.desiredDish.Ingredient3] += _match3.GetSelectedItems()[client.desiredDish.Ingredient3];
+                    }
 
                     _dishesSummary[client.desiredDish] += 1;
                 }

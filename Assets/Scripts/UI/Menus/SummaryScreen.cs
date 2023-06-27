@@ -10,20 +10,30 @@ public class SummaryScreen : MonoBehaviour
     [SerializeField] private Match3 _match3;
     [SerializeField] private DiningHall _diningHall;
 
+    [SerializeField] private GameObject _threeItemsDishSummary;
+    [SerializeField] private GameObject _twoItemsDishSummary;
+
     private LevelSO _levelSO;
 
     public void Activate()
     {   
         _levelSO = _match3.levelSO;
-        foreach(GameObject dish in _dishes)
-        {
-            dish.SetActiveRecursively(false);
-        }
-
+        
         for (int i = 0; i < _match3.levelSO.recipes.Count; i++)
         {
             var tmpDish = _dishes[i];
             tmpDish.SetActiveRecursively(true);
+
+            if(_levelSO.recipes[i].Ingredient3 != null)
+            {
+                var tmp = Instantiate(_threeItemsDishSummary, tmpDish.transform.position, Quaternion.identity, tmpDish.transform);
+                tmpDish = tmp;
+            }
+            else
+            {
+                var tmp = Instantiate(_twoItemsDishSummary, tmpDish.transform.position, Quaternion.identity, tmpDish.transform);
+                tmpDish = tmp;
+            }
 
             if (_diningHall._dishesSummary.ContainsKey(_levelSO.recipes[i]))
             {
@@ -47,6 +57,15 @@ public class SummaryScreen : MonoBehaviour
                     tmpDish.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = _diningHall._recipesSummary[_levelSO.recipes[i]][_levelSO.recipes[i].Ingredient2].ToString();
                 }
             }
+            if (_levelSO.recipes[i].Ingredient3 != null && _levelSO.recipes[i].Ingredient3 != null)
+            {
+                tmpDish.transform.GetChild(10).GetChild(0).GetComponent<Image>().sprite = _levelSO.recipes[i].Ingredient3.Sprite;
+                if (_diningHall._recipesSummary.ContainsKey(_levelSO.recipes[i]))
+                {
+                    tmpDish.transform.GetChild(9).GetComponent<TextMeshProUGUI>().text = _diningHall._recipesSummary[_levelSO.recipes[i]][_levelSO.recipes[i].Ingredient3].ToString();
+                }
+            }
         }
+
     }
 }
