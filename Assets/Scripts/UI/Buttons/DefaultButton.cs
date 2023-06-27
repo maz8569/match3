@@ -6,6 +6,6 @@ public class DefaultButton : MonoBehaviour
 {
     protected void PlayPressedSound()
     {
-        AudioPlayer.Instance.PlayAudio(Clip.BUTTON_PRESS);
+        //AudioPlayer.Instance.PlayAudio(Clip.BUTTON_PRESS);
     }
 }
