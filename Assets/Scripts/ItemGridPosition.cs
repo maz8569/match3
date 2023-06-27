@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,4 +58,8 @@ public class ItemGridPosition
         return itemGrid?.ToString();
     }
 
+    public void SetMaterial(Material highlitedSpriteMaterial)
+    {
+        itemGrid?.SetMaterial(highlitedSpriteMaterial);
+    }
 }

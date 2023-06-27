@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemGrid
 {
     public event EventHandler OnDestroyed;
+    public event EventHandler<Material> OnMaterialChanged;
 
     private ItemSO item;
     private int x, y;
@@ -37,5 +38,10 @@ public class ItemGrid
     public override string ToString()
     {
         return item.name;
+    }
+
+    public void SetMaterial(Material material)
+    {
+        OnMaterialChanged?.Invoke(this, material);
     }
 }

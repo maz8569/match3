@@ -52,13 +52,16 @@ public class Match3 : MonoBehaviour, IDataPesristence
     public RecipeSO CurrentRecipe { get { return currentRecipe; } private set { CurrentRecipe = value; } }
 
     private List<int2> possibleMoves;
-    private List<int2> chosenItemsPos;
+    [SerializeField] private List<int2> chosenItemsPos;
     private List<int2> chosenItemsPosHelper; //TODO: use chosenItemsPos
     private Dictionary<ItemSO, int> chosenItems;
 
     private int levelNumber;
 
     public float offset = 0.33f;
+
+    [SerializeField] private Material defaultSpriteMaterial;
+    [SerializeField] private Material highlitedSpriteMaterial;
 
     private void Awake()
     {
@@ -410,6 +413,8 @@ public class Match3 : MonoBehaviour, IDataPesristence
 
             CheckRecipe();
 
+            temp.SetMaterial(highlitedSpriteMaterial);
+
             OnNewItemChanged?.Invoke(this, EventArgs.Empty);
             return;
         }
@@ -420,7 +425,10 @@ public class Match3 : MonoBehaviour, IDataPesristence
         {
             ItemSO item = GetItemSO(chosenItemsPos[^1].x, chosenItemsPos[^1].y);
 
+            int2 toDelete = chosenItemsPos[^1];
+
             chosenItemsPos.RemoveAt(chosenItemsPos.Count - 1);
+            grid.GetGridObject(toDelete.x, toDelete.y).SetMaterial(defaultSpriteMaterial);
 
             chosenItems[item] -= 1;
 

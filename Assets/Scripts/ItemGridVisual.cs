@@ -7,6 +7,7 @@ public class ItemGridVisual
     private Transform transform;
     private ItemGrid itemGrid;
     private float cellSize;
+    private SpriteRenderer spriteRenderer;
 
     public ItemGridVisual(Transform transform, ItemGrid itemGrid, float cellSize)
     {
@@ -15,6 +16,13 @@ public class ItemGridVisual
         this.cellSize = cellSize;
 
         itemGrid.OnDestroyed += DestroyItemGrid;
+        spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        itemGrid.OnMaterialChanged += ItemGrid_OnMaterialChanged;
+    }
+
+    private void ItemGrid_OnMaterialChanged(object sender, Material e)
+    {
+        spriteRenderer.material = e;
     }
 
     private void DestroyItemGrid(object sender, System.EventArgs e)

@@ -39,6 +39,6 @@ Material:
     m_Ints: []
     m_Floats:
     - _Arrows_speed: 3
-    - _Number_of_arrows: 3
+    - _Number_of_arrows: 6
     m_Colors: []
   m_BuildTextureStacks: []
