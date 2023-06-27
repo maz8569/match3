@@ -44,6 +44,8 @@ public class DiningHall : MonoBehaviour
         _seats[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.5f, Screen.height * 0.68f, 0.0f));
         _seats[2].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.8f, Screen.height * 0.68f, 0.0f));
 
+        AudioPlayer.Instance.PlayMusic(Clip.KITCHEN_SOUNDS);
+
         StartCoroutine(InitializeClients());
 
         StartCoroutine(StartCountdown());

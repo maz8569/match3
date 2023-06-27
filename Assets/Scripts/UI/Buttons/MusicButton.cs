@@ -6,13 +6,13 @@ public class MusicButton : StateButton
 {
     private void TurnMusicOn()
     {
-
+        AudioPlayer.Instance.MuteMusic(!AudioPlayer.Instance.musicMuted);
     }
 
     public void OnTap()
     {
-        PlayPressedSound();
         TurnMusicOn();
+        PlayPressedSound();
         ChangeImg();
     }
 }

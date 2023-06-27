@@ -7,6 +7,11 @@ public class WeekMenu : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _weekNr;
     [SerializeField] private GameObject _dayButtons;
+
+    public void Start()
+    {
+        AudioPlayer.Instance.PlayMusic(Clip.MENU_MUSIC);
+    }
     public void ChangeWeek()
     {
         _weekNr.text = "Week " + ProgressManager.Instance.CurrentWeek;

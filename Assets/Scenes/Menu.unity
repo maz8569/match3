@@ -3870,7 +3870,7 @@ PrefabInstance:
       objectReference: {fileID: 1619703803}
     - target: {fileID: 7604544158411207898, guid: 945ec1704dcb3314aab0f322ecefc5e4, type: 3}
       propertyPath: _clips.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7604544158411207898, guid: 945ec1704dcb3314aab0f322ecefc5e4, type: 3}
       propertyPath: _clips.Array.data[0]
@@ -3880,5 +3880,13 @@ PrefabInstance:
       propertyPath: _clips.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 8cc688e4eeadc7b428803752c3981bb5, type: 3}
+    - target: {fileID: 7604544158411207898, guid: 945ec1704dcb3314aab0f322ecefc5e4, type: 3}
+      propertyPath: _clips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: d93f48f9187f6e948b3bb78d13ffb898, type: 3}
+    - target: {fileID: 7604544158411207898, guid: 945ec1704dcb3314aab0f322ecefc5e4, type: 3}
+      propertyPath: _clips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: f04a9848a7a85714d8bebf8d5c5dc13a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945ec1704dcb3314aab0f322ecefc5e4, type: 3}
