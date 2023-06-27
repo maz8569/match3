@@ -12,7 +12,6 @@ public class SoundButton : StateButton
     private void TurnSoundOn()
     {
         AudioPlayer.Instance.audioMuted = !AudioPlayer.Instance.audioMuted;
-
     }
 
     public void OnTap()

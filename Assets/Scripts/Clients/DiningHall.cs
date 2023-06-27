@@ -195,4 +195,16 @@ public class DiningHall : MonoBehaviour
             _match3.CheckBoardForItem(client.desiredDish);
         }
     }
+
+    public List<RecipeSO> GetWantedDishes()
+    {
+        List<RecipeSO> ret = new List<RecipeSO>();
+
+        foreach(Client client in _clients)
+        {
+            ret.Add(client.desiredDish);
+        }
+
+        return ret;
+    }
 }

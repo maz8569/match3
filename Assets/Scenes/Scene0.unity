@@ -1988,7 +1988,7 @@ MonoBehaviour:
   _waitTimeBetweenClients: 2
   _clientPrefab: {fileID: 3353207458875984492, guid: 87f5887cdf24ba14b9bef224506cd4f4, type: 3}
   _match3: {fileID: 1324761713}
-  _roundTime: 5
+  _roundTime: 60
   _clockArrow: {fileID: 513622685}
   _passedTime: {fileID: 726387852}
   _baseClientPoints: 2
@@ -6907,6 +6907,7 @@ MonoBehaviour:
   pfBackgroundGridVisual: {fileID: 2726273758137313710, guid: b52bc2b65b3a3f746b2bacc59f69a00c, type: 3}
   match3: {fileID: 1324761713}
   touchManager: {fileID: 2119578399}
+  _diningHall: {fileID: 427163659}
 --- !u!4 &2031020949
 Transform:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ public class Match3Visual : MonoBehaviour
     [SerializeField] private Transform pfBackgroundGridVisual;
     [SerializeField] private Match3 match3;
     [SerializeField] private TouchManager touchManager;
+    [SerializeField] private DiningHall _diningHall; //TODO: hotfix, check if couldn't be done better
 
     private BaseGrid<ItemGridPosition> grid;
     private Dictionary<ItemGrid, ItemGridVisual> itemGridDictionary;
@@ -133,7 +134,7 @@ public class Match3Visual : MonoBehaviour
         if(match3.GetChosenItemsPositionCount() > 2)
         {
             match3.CheckRecipe();
-            if (match3.CurrentRecipe != null)
+            if (match3.CurrentRecipe != null && _diningHall.GetWantedDishes().Contains(match3.CurrentRecipe))
             {
                 match3.CalculateScore();
                 match3.DestroyChosenItems();
