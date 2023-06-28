@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ItemGridVisual
 {
@@ -18,6 +19,13 @@ public class ItemGridVisual
         itemGrid.OnDestroyed += DestroyItemGrid;
         spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         itemGrid.OnMaterialChanged += ItemGrid_OnMaterialChanged;
+        itemGrid.OnWrongSelected += ItemGrid_OnWrongSelected;
+        
+    }
+
+    private void ItemGrid_OnWrongSelected(object sender, System.EventArgs e)
+    {
+        transform.DOShakeRotation(1f, 30);
     }
 
     private void ItemGrid_OnMaterialChanged(object sender, Material e)

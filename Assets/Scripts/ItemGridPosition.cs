@@ -62,4 +62,9 @@ public class ItemGridPosition
     {
         itemGrid?.SetMaterial(highlitedSpriteMaterial);
     }
+
+    public void SelectWrong()
+    {
+        itemGrid?.SelectedWrong();
+    }
 }

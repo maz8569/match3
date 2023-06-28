@@ -141,9 +141,14 @@ public class Match3Visual : MonoBehaviour
                 match3.FallItemsIntoEmpty();
                 match3.SpawnNewMissingItems();
             }
+            else
+            {
+                match3.WrongSelected();
+            }
         }
         else
         {
+            match3.WrongSelected();
             match3.ClearRecipe();
         }
 

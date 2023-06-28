@@ -6,6 +6,7 @@ public class ItemGrid
 {
     public event EventHandler OnDestroyed;
     public event EventHandler<Material> OnMaterialChanged;
+    public event EventHandler OnWrongSelected;
 
     private ItemSO item;
     private int x, y;
@@ -43,5 +44,10 @@ public class ItemGrid
     public void SetMaterial(Material material)
     {
         OnMaterialChanged?.Invoke(this, material);
+    }
+
+    public void SelectedWrong()
+    {
+        OnWrongSelected?.Invoke(this, EventArgs.Empty);
     }
 }

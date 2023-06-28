@@ -678,6 +678,14 @@ public class Match3 : MonoBehaviour, IDataPesristence
         return chosenItems;
     }
 
+    public void WrongSelected()
+    {
+        foreach(var pos in chosenItemsPos)
+        {
+            grid.GetGridObject(pos.x, pos.y).SelectWrong();
+        }
+    }
+
     public void ClearHighlight()
     {
         for(int x = 0; x < levelSO.width; ++x)
