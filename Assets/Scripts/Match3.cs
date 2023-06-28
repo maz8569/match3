@@ -47,14 +47,14 @@ public class Match3 : MonoBehaviour, IDataPesristence
     public int score; //TODO: change back to private
     public int checkedStars = 0; //TODO: change back to private
 
-    private RecipeSO currentRecipe;
+    [SerializeField] private RecipeSO currentRecipe;
 
     public RecipeSO CurrentRecipe { get { return currentRecipe; } private set { CurrentRecipe = value; } }
 
     private List<int2> possibleMoves;
     [SerializeField] private List<int2> chosenItemsPos;
     private List<int2> chosenItemsPosHelper; //TODO: use chosenItemsPos
-    private Dictionary<ItemSO, int> chosenItems;
+    [SerializeField] private Dictionary<ItemSO, int> chosenItems;
 
     private int levelNumber;
 
@@ -430,12 +430,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
             chosenItemsPos.RemoveAt(chosenItemsPos.Count - 1);
             grid.GetGridObject(toDelete.x, toDelete.y).SetMaterial(defaultSpriteMaterial);
 
-            chosenItems[item] -= 1;
-
-            if(chosenItems[item] == 0)
-            {
-                chosenItems.Remove(item);
-            }
+            RemoveItemFromChosenList(item);
 
             CheckRecipe();
 
@@ -507,6 +502,8 @@ public class Match3 : MonoBehaviour, IDataPesristence
 
         chosenItems.Clear();
         chosenItemsPos.Clear();
+
+        ClearHighlight();
 
     }
 
@@ -679,5 +676,16 @@ public class Match3 : MonoBehaviour, IDataPesristence
     public Dictionary<ItemSO, int> GetSelectedItems()
     {
         return chosenItems;
+    }
+
+    public void ClearHighlight()
+    {
+        for(int x = 0; x < levelSO.width; ++x)
+        {
+            for(int y = 0; y < levelSO.height; ++y)
+            {
+                grid.GetGridObject(x, y).SetMaterial(defaultSpriteMaterial);
+            }
+        }
     }
 }

@@ -4435,9 +4435,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 0.5
   cellDistance: 0.1
-  levelSO: {fileID: 11400000, guid: f645c34c0f242b04897f1eff188ad008, type: 2}
+  levelSO: {fileID: 11400000, guid: ee594426063199d44bf1ee454ad26736, type: 2}
   score: 0
   checkedStars: 0
+  currentRecipe: {fileID: 0}
   chosenItemsPos: []
   offset: 0.33
   defaultSpriteMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
