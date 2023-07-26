@@ -49,12 +49,13 @@ public class Match3 : MonoBehaviour, IDataPesristence
 
     [SerializeField] private RecipeSO currentRecipe;
 
-    public RecipeSO CurrentRecipe { get { return currentRecipe; } private set { CurrentRecipe = value; } }
+    public RecipeSO CurrentRecipea { get { return currentRecipe; } private set { CurrentRecipea = value; } }
 
     private List<int2> possibleMoves;
     [SerializeField] private List<int2> chosenItemsPos;
     private List<int2> chosenItemsPosHelper; //TODO: use chosenItemsPos
     [SerializeField] private Dictionary<ItemSO, int> chosenItems;
+    private Dictionary<ItemSO, int> chosenItemsHelper;
 
     private int levelNumber;
 
@@ -69,6 +70,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
         chosenItemsPos = new List<int2>();
         chosenItemsPosHelper = new List<int2>();
         chosenItems = new Dictionary<ItemSO, int>();
+        chosenItemsHelper = new Dictionary<ItemSO, int>();
     }
 
     private void OnEnable()
@@ -152,14 +154,14 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 retVal |= CheckBoardHelper(i - 1, j - 1, 2);
                 retVal |= CheckBoardHelper(i + 1, j - 1, 2);
 
+                chosenItems.Clear();
+                chosenItemsPosHelper.Clear();
+                currentRecipe = null;
+
                 if(retVal)
                 {
                     return true;
                 }
-
-                chosenItems.Clear();
-                chosenItemsPosHelper.Clear();
-                currentRecipe = null;
                 
             }
         }
@@ -232,7 +234,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
         for(int i = 0; i < gridHeight; i++){
             for(int j = 0; j < gridWidth; j++){
 
-                chosenItems.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1);
+                chosenItemsHelper.Add(grid.GetGridObject(i, j).GetItemGrid().Item, 1);
                 chosenItemsPosHelper.Add(new int2(i, j));
 
                 retVal |= CheckBoardForItemHelper(i + 1, j, 2, recipe);
@@ -242,14 +244,14 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 retVal |= CheckBoardForItemHelper(i - 1, j - 1, 2, recipe);
                 retVal |= CheckBoardForItemHelper(i + 1, j - 1, 2, recipe);
 
+                chosenItemsHelper.Clear();
+                chosenItemsPosHelper.Clear();
+                currentRecipe = null;
+
                 if(retVal)
                 {
                     return true;
                 }
-
-                chosenItems.Clear();
-                chosenItemsPosHelper.Clear();
-                currentRecipe = null;
                 
             }
         }
@@ -276,18 +278,17 @@ public class Match3 : MonoBehaviour, IDataPesristence
         } 
         else 
         {
-            AddItemToChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
+            AddItemToChosenListHelper(grid.GetGridObject(x, y).GetItemGrid().Item);
 
             if(depth == 3)
             {
-                CheckRecipe();
+                CheckRecipeHelper();
 
-                RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
+                RemoveItemFromChosenListHelper(grid.GetGridObject(x, y).GetItemGrid().Item);
                 chosenItemsPosHelper.Remove(new int2(x, y));
 
                 if(currentRecipe == recipe)
                 {
-
                     currentRecipe = null;
                     return true;
                 }
@@ -305,7 +306,7 @@ public class Match3 : MonoBehaviour, IDataPesristence
                 retVal |= CheckBoardForItemHelper(x + 1, y - 1, depth + 1, recipe);
                 retVal |= CheckBoardForItemHelper(x - 1, y + 1, depth + 1, recipe);
 
-                RemoveItemFromChosenList(grid.GetGridObject(x, y).GetItemGrid().Item);
+                RemoveItemFromChosenListHelper(grid.GetGridObject(x, y).GetItemGrid().Item);
                 chosenItemsPosHelper.Remove(new int2(x, y));
             }
         }
@@ -354,8 +355,25 @@ public class Match3 : MonoBehaviour, IDataPesristence
         }
     }
 
+    private void RemoveItemFromChosenListHelper(ItemSO item)
+    {
+        if(!chosenItemsHelper.ContainsKey(item))
+        {
+            return;
+        }
+        else if (chosenItemsHelper[item] > 1)
+        {
+            chosenItemsHelper[item] -= 1;
+        }
+        else
+        {
+            chosenItemsHelper.Remove(item);
+        }
+    }
+
     private void AddItemToChosenList(ItemSO item)
     {
+        Debug.Log(item.name);
         if (!chosenItems.ContainsKey(item))
         {
             chosenItems.Add(item, 1);
@@ -363,6 +381,19 @@ public class Match3 : MonoBehaviour, IDataPesristence
         else
         {
             chosenItems[item] += 1;
+        }
+    }
+
+    private void AddItemToChosenListHelper(ItemSO item)
+    {
+        Debug.Log(item.name);
+        if (!chosenItemsHelper.ContainsKey(item))
+        {
+            chosenItemsHelper.Add(item, 1);
+        }
+        else
+        {
+            chosenItemsHelper[item] += 1;
         }
     }
 
@@ -545,6 +576,23 @@ public class Match3 : MonoBehaviour, IDataPesristence
             var list = recipe.GetItemList();
 
             if (list.Count == chosenItems.Count && !list.Except(chosenItems.Keys).Any())
+            {
+                currentRecipe = recipe;
+                return;
+            }
+
+        }
+        currentRecipe = null;
+        //Debug.Log(chosenItems.ToString());
+    }
+
+    public void CheckRecipeHelper()
+    {
+        foreach(var recipe in levelSO.recipes)
+        {
+            var list = recipe.GetItemList();
+
+            if (list.Count == chosenItemsHelper.Count && !list.Except(chosenItemsHelper.Keys).Any())
             {
                 currentRecipe = recipe;
                 return;

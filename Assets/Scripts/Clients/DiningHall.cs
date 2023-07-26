@@ -103,6 +103,7 @@ public class DiningHall : MonoBehaviour
 
     private IEnumerator InstantiateClient(int seat)
     {
+        Debug.Log("Instantiate");
         GameObject tmp = Instantiate(_clientPrefab, new Vector3(_seats[seat].transform.position.x, _seats[seat].transform.position.y, 0), Quaternion.identity);
 
         Client tmpClient = tmp.GetComponent<Client>();
@@ -124,6 +125,7 @@ public class DiningHall : MonoBehaviour
 
     public IEnumerator DeleteClient(Client client)
     {
+        Debug.Log("CallDelete");
         int freedSeat = client._seatNr;
 
         if(client.IsServed())
@@ -136,14 +138,13 @@ public class DiningHall : MonoBehaviour
         yield return new WaitForSeconds(_waitTimeBetweenClients);
 
         _clients.Remove(client);
-        
+        Debug.Log("CallDelete");
         _plates[freedSeat].SetActive(false);
         _clouds[freedSeat].SetActive(false);
         _dishes[freedSeat].SetActive(false);
 
         Destroy(client.transform.gameObject); //TODO: fix error
-
-        yield return new WaitForSeconds(_waitTimeBetweenClients);
+        Debug.Log("CallDestroy");
         StartCoroutine(InstantiateClient(freedSeat));
     }
 

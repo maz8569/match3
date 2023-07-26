@@ -134,7 +134,7 @@ public class Match3Visual : MonoBehaviour
         if(match3.GetChosenItemsPositionCount() > 2)
         {
             match3.CheckRecipe();
-            if (match3.CurrentRecipe != null && _diningHall.GetWantedDishes().Contains(match3.CurrentRecipe))
+            if (match3.CurrentRecipea != null && _diningHall.GetWantedDishes().Contains(match3.CurrentRecipea))
             {
                 match3.CalculateScore();
                 match3.DestroyChosenItems();
